@@ -1,0 +1,36 @@
+* {
+    border: 1px solid cyan;
+}
+
+.page {
+    font-family: 'Inter' , Arial , sans-serif;
+    background: black;
+    max-width: 1280px;
+    margin: 0 auto;
+}
+
+.header {
+    max-width: 882px;
+    height: 74px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    margin: 45px auto 0;
+
+}
+
+.header__logo {
+    max-width: 142px;
+    height: auto;
+    margin: 0;
+}
+
+.header__line {
+    max-width: 882px;
+    /* margin-top: 41px 0 0 0; */
+}
+
+.profile {
+    max-width: 882px;
+    height: auto;
+}
