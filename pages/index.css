@@ -33,4 +33,17 @@
 .profile {
     max-width: 882px;
     height: auto;
+    display: flex;
+}
+
+.profile__avatar {
+    border-radius: 10px;
+    width: 120px;
+    height: auto;
+}
+
+.profile__avatar {
+    font-weight: 500;
+    font-size: 42px;
+    line-height: 56px;
 }
