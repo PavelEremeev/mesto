@@ -3,3 +3,10 @@
     display: flex;
 
 }
+
+
+@media screen and (max-width: 650px) {
+    .profile__author-card {
+        justify-content: center;
+    }
+}

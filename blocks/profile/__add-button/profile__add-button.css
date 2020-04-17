@@ -9,3 +9,11 @@
     border: none;
 }
 
+
+@media screen and (max-width: 650px) {
+    .profile__add-button {
+        margin-top: 36px;
+        background-image: url(../../../images/add_button_wide.svg);
+        width: 282px;
+    }
+}

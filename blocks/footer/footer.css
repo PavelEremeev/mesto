@@ -3,5 +3,22 @@
 .footer {
     max-width: 882px;
     display: flex;
-    margin: 66px 19px 60px;
+    margin: 66px auto 60px;
+}
+
+
+
+@media screen and (max-width: 945px) {
+    .footer {
+        margin-left: 19px;
+        margin-right: 19px;
+    }
+}
+
+
+@media screen and (max-width: 375px) {
+    .footer {
+        margin-top: 48px;
+        margin-bottom: 36px;
+    }
 }

@@ -10,3 +10,19 @@
     margin: 45px auto 0;
 
 }
+
+
+@media screen and (max-width: 945px) {
+    .header{
+        margin-left: 19px;
+        margin-right: 19px;
+    }
+}
+
+
+@media screen and (max-width: 375px) {
+    .header{
+        margin: 28px 0 0;
+        height: 56px;
+    }
+}
