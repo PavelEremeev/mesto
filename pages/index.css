@@ -158,3 +158,17 @@
     transition: ease-in .3s all;
 }
 
+.footer {
+    max-width: 882px;
+    display: flex;
+    margin: 66px 19px 60px;
+}
+
+.footer__copyright {
+    font-style: normal;
+    font-weight: normal;
+    font-size: 18px;
+    line-height: 22px;
+    color: #545454;
+    margin: 0;
+}
