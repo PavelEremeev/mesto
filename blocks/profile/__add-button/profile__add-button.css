@@ -7,6 +7,14 @@
     align-self: center;
     background-color: transparent;
     border: none;
+    cursor: pointer;
+    transition: linear .3s all;
+}
+
+
+.profile__add-button:hover {
+    opacity: .5;
+    transition: linear .3s all;
 }
 
 

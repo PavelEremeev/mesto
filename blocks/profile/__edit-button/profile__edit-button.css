@@ -7,8 +7,14 @@
     margin-left: 17px;
     background-color: transparent;
     border: none;
+    cursor: pointer;
+    transition: linear .3s all;
 }
 
+.profile__edit-button:hover {
+    opacity: .5;
+    transition: linear .3s all;
+}
 
 @media screen and (max-width: 650px) {
     .profile__edit-button {
