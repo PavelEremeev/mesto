@@ -1,5 +1,5 @@
-@import URL(./__name/popup__input__name.css);
-@import URL(./__job/popup__input__job.css);
+@import URL(./_name/popup__input_name.css);
+@import URL(./_job/popup__input_job.css);
 
 .popup__input {
     font-weight: normal;

@@ -42,6 +42,9 @@ function formSubmitHandler (evt) {
     // Выберите элементы, куда должны быть вставлены значения полей
 
     // Вставьте новые значения с помощью textContent
+
+    profile.querySelector('.profile__text').textContent = nameProfile.value; 
+    profile.querySelector('.profile__subtext').textContent = jobProfile.value;
 }
 
 // Прикрепляем обработчик к форме:
