@@ -1,117 +1,21 @@
+@import url(./__containter/popup__containter.css);
+@import url(./__form/popup__form.css);
+@import url(./__close-button/popup__close-button.css);
+@import url(./__text/popup__text.css);
+@import url(./__input/popup__input.css);
+@import url(./__input/__name/popup__input__name.css);
+@import url(./__input/__job/popup__input__job.css);
+@import url(./__submit-button/popup__submit-button.css);
+
 .popup {
     position: fixed;
     width: 100%;
     height: 100%;
     background-color:rgba(0,0,0, 0.8);
-    ;
     top: 0;
     left: 0;  
     display: none;
     transition: all 1s ease-in-out;
     align-items: center;
     justify-content: center;
-}
-
-.popup_opened {
-    display: flex;
-}
-
-.popup__containter {
-    display: flex;
-    flex-direction: column;
-    max-width: 430px;
-    max-height: 330px;
-    background: #FFFFFF;
-    border-radius: 10px;
-    margin: 35px;
-}
-
-
-.popup__form {
-    max-width: 358px;
-    margin: 34px 36px 36px;
-    position: relative;
-}
-
-
-@media screen and (max-width: 375px) {
-    .popup__form  {
-        margin: 20px;
-    }
-    }    
-
-.popup__input {
-    font-weight: normal;
-    font-size: 14px;
-    line-height: 25px; 
-    width: 100%;
-    border: none;
-    margin-bottom: 20px;
-    border-bottom: 1px solid rgba(0,0,0,.2);
-}
-
-.popup__text {
-    font-weight: 900;
-    font-size: 24px;
-    line-height: 29px;
-    margin: 0px 0px 54px;
-}
-
-
-@media screen and (max-width: 375px) {
-    .popup__text  {
-        margin-bottom: 34px;
-    }
-    }    
-
-.popup__submit-button {
-    background-image: url(../../images/submit_Button.svg);
-    border: none;
-    cursor: pointer;
-    transition: linear .3s all;
-    width: 100%;
-    height: 50px;
-    background-position: center;
-    margin-top: 22px;
-}
-
-.popup__submit-button:hover {
-    opacity: .5;
-    transition: linear .3s all;
-}
-
-.popup__close-button {
-    background-image: url(../../images/close_button.svg);
-    background-position: center;
-    border: none;
-    cursor: pointer;
-    transition: linear .3s all;
-    width: 41px;
-    height: 41px;
-    background-color: transparent;
-    position: absolute;
-    top: -75px;
-    right: -75px;
-
-}
-
-
-.popup__close-button:hover {
-    opacity: .5;
-    transition: linear .3s all;
-}
-
-@media screen and (max-width: 375px) {
-.popup__close-button  {
-    top: -100px;
-    right: 70px;
-}
-}
-
-.popup__input_name {
-
-}
-
-.popup__input_job {
-
 }
