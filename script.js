@@ -3,22 +3,26 @@
 let popup = document.querySelector('.popup');
 let editButton = document.querySelector('.profile__edit-button');
 let closeButton = document.querySelector('.popup__close-button');
-let nameProfile = document.querySelector('.popup__input_name');
-let jobProfile = document.querySelector('.popup__input_job');
 let profile = document.querySelector('.profile');
+let nameProfile = document.querySelector('.profile__text');
+let jobProfile = document.querySelector('.profile__subtext');
+let nameInput = document.querySelector('.popup__input_name');
+let jobInput = document.querySelector('.popup__input_job');
+
 
 // Открытие поп-ап
 
 function popupOpen() {
         popup.classList.add('popup_opened');
-        nameProfile.value = profile.querySelector('.profile__text').textContent;
-        jobProfile.value = profile.querySelector('.profile__subtext').textContent;
+        nameInput.value = nameProfile.textContent;
+        jobInput.value = jobProfile.textContent;
 }
 
 // Закрытие поп-ап
 
 function popupClose() {
     popup.classList.remove('popup_opened');
+
 }
 
 // Слушатели поп-ап
@@ -27,7 +31,7 @@ editButton.addEventListener ('click', popupOpen);
 closeButton.addEventListener ('click', popupClose);
 
 // Находим форму в DOM
-let formElement = document.querySelector('.popup__submit-button');
+let formElement = document.querySelector('.popup__form');
 
 // Обработчик «отправки» формы, хотя пока
 // она никуда отправляться не будет
@@ -36,6 +40,7 @@ function formSubmitHandler (evt) {
                                                 // Так мы можем определить свою логику отправки.
                                                 // О том, как это делать, расскажем позже.
 
+    // Находим поля формы в DOM
 
     // Получите значение полей из свойства value
 
@@ -43,8 +48,8 @@ function formSubmitHandler (evt) {
 
     // Вставьте новые значения с помощью textContent
 
-    profile.querySelector('.profile__text').textContent = nameProfile.value; 
-    profile.querySelector('.profile__subtext').textContent = jobProfile.value;
+    nameProfile.textContent = nameInput.value; 
+    jobProfile.textContent = jobInput.value;
 }
 
 // Прикрепляем обработчик к форме:
