@@ -22,6 +22,8 @@ function popupOpen() {
 
 function popupClose() {
     popup.classList.remove('popup_opened');
+    nameInput.value = nameProfile.textContent; // не пойму как еще организовать сброс данных по крестику :(
+    jobInput.value = jobProfile.textContent;
 
 }
 
@@ -50,6 +52,8 @@ function formSubmitHandler (evt) {
 
     nameProfile.textContent = nameInput.value; 
     jobProfile.textContent = jobInput.value;
+
+    popupClose();
 }
 
 // Прикрепляем обработчик к форме:
