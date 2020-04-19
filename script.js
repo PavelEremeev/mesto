@@ -1,20 +1,20 @@
-// Задаем переменные
+// Задаем константы
 
-let popup = document.querySelector('.popup');
-let editButton = document.querySelector('.profile__edit-button');
-let closeButton = document.querySelector('.popup__close-button');
-let profile = document.querySelector('.profile');
-let nameProfile = document.querySelector('.profile__text');
-let jobProfile = document.querySelector('.profile__subtext');
-let nameInput = document.querySelector('.popup__input_name');
-let jobInput = document.querySelector('.popup__input_job');
-
+const popup = document.querySelector('.popup');
+const editButton = document.querySelector('.profile__edit-button');
+const closeButton = document.querySelector('.popup__close-button');
+const profile = document.querySelector('.profile');
+const nameProfile = document.querySelector('.profile__text');
+const jobProfile = document.querySelector('.profile__subtext');
+const nameInput = document.querySelector('.popup__input_name');
+const jobInput = document.querySelector('.popup__input_job');
+const formElement = document.querySelector('.popup__form');
 
 // Открытие поп-ап
 
 function popupOpen() {
         popup.classList.add('popup_opened');
-        nameInput.value = nameProfile.textContent;
+        nameInput.value = nameProfile.textContent; // данные строки отвечают за установку исходных name/job в  форму input
         jobInput.value = jobProfile.textContent;
 }
 
@@ -22,18 +22,9 @@ function popupOpen() {
 
 function popupClose() {
     popup.classList.remove('popup_opened');
-    nameInput.value = nameProfile.textContent; // не пойму как еще организовать сброс данных по крестику :(
-    jobInput.value = jobProfile.textContent;
+
 
 }
-
-// Слушатели поп-ап
-
-editButton.addEventListener ('click', popupOpen);
-closeButton.addEventListener ('click', popupClose);
-
-// Находим форму в DOM
-let formElement = document.querySelector('.popup__form');
 
 // Обработчик «отправки» формы, хотя пока
 // она никуда отправляться не будет
@@ -59,3 +50,8 @@ function formSubmitHandler (evt) {
 // Прикрепляем обработчик к форме:
 // он будет следить за событием “submit” - «отправка»
 formElement.addEventListener('submit', formSubmitHandler);
+
+// Слушатели поп-ап
+
+editButton.addEventListener ('click', popupOpen);
+closeButton.addEventListener ('click', popupClose);

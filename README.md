@@ -1,5 +1,7 @@
 # Проект 4: Mesto
 
+GithubPages:  https://paveleremeev.github.io/mesto/
+
 ### Обзор
 * Description
 * Technologies
@@ -9,7 +11,8 @@
 
 **Intro**
 
-* This is a project about traveling in Russia. The site is creating using by Figma layout for different screen resolutions. (Figma layout - https://www.figma.com/file/StZjf8HnoeLdiXS7dYrLAh/JavaScript.-Sprint-4)
+* This is a project about traveling in Russia. The site is creating using by Figma layout for different screen resolutions.
+ (Figma layout - https://www.figma.com/file/StZjf8HnoeLdiXS7dYrLAh/JavaScript.-Sprint-4)
 
 **Technologies**
 

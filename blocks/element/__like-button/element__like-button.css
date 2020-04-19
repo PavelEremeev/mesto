@@ -6,4 +6,11 @@
     height: 19px;
     border: none;
     transition: ease-in .3s all;
+    cursor: pointer;
+}
+
+
+.element__like-button:hover {
+    opacity: .5;
+    transition: linear .3s all;
 }
