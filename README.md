@@ -1,17 +1,17 @@
-# Проект 4: Место
+# Проект 3: Путешествие по России 
 
 ### Обзор
+* Description
+* Technologies
 
-* Figma
-* Картинки
+**Intro**
 
-**Figma**
+This is my 4th project
+The site is creating using by Figma layout for different screen resolutions.
+(Figma layout - https://www.figma.com/file/MTZ7K0gUaN07iNIj8YCcLm/Russia-(mobile)-(Copy)?node-id=0%3A1)
 
-* [Ссылка на макет в Figma](https://www.figma.com/file/StZjf8HnoeLdiXS7dYrLAh/JavaScript.-Sprint-4)
+**Technologies**
 
-**Картинки**
-
-Доставать картинки предстоит из Фигмы. Это расхожая практика, поэтому полезно потренироваться.
-Не забудьте [оптимизировать картинки](https://tinypng.com/), чтобы ваш сайт загружался быстрее.
-
-Удачи!
+In this project i using:
+0) Grid's and Flexbox'ies for adaptive/responsive layout;
+1) Javascript - my first steps.
