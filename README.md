@@ -6,9 +6,9 @@ GithubPages:  https://paveleremeev.github.io/mesto/
 * Description
 * Technologies
 
-**Intro**
+**Description**
 
-* This is demosntration card-website. The site is creating using by Figma layout for different screen resolutions.
+This is demosntration card-website. The site is creating using by Figma layout for different screen resolutions.
  (Figma layout - https://www.figma.com/file/StZjf8HnoeLdiXS7dYrLAh/JavaScript.-Sprint-4)
 
 **Technologies**
