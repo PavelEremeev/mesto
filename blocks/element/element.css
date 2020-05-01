@@ -2,6 +2,7 @@
 @import url(./__item/element__item.css);
 @import url(./__text/element__text.css);
 @import url(./__like-button/element__like-button.css);
+@import url(./__remove-button/element__remove-button.css);
 
 .element {
     max-width: 282px;
@@ -11,6 +12,7 @@
     border-radius: 10px;
     overflow: hidden;
     transition: ease-in-out .3s all;
+    position: relative;
 }
 
 .element:hover {
