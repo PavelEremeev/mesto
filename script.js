@@ -38,16 +38,28 @@ const cards = [
     }
 ];
 
+
 // Добавление карточек
+
 function makeCards(item) {
     const cardTemplate = document.querySelector('#card-template').content;
     const elements = document.querySelector('.elements');
-    const cardElement = cardTemplate.cloneNode(true);
+    let cardElement = cardTemplate.cloneNode(true);
 
     cardElement.querySelector('.element__text').textContent = item.name;
     cardElement.querySelector('.element__image').src = item.link;
+    
+// Включение лайков
+
+    cardElement.querySelector('.element__like-button').addEventListener ('click', function (evt) {
+        const eventTarget = evt.target
+        eventTarget.classList.toggle('element__like-button_active');
+    }); 
 
     elements.append(cardElement);
+
+
+
 };
 
 cards.forEach(makeCards);
