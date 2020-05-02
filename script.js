@@ -73,22 +73,32 @@ const removeButton = cardElement.querySelector('.element__remove-button');
     deleteElement.remove();
     });
 
-    elements.append(cardElement);
+    elements.prepend(cardElement);
 
 };
 
 cards.forEach(makeCards);
 
 
+// Очищение значений в поп-ап
+function popupCleanValues() {
+    name.value = null;
+    object.value = null;
+}
+
 // Открытие поп-ап редактирования профиля
 
-function popupOpen() {
-        popup.classList.add('popup_opened');
-        popupTitle.textContent = 'Редактировать профиль';
-        name.placeholder = 'ФИО';
-        object.placeholder = 'Призвание';
-        name.value = textProfile.textContent; // данные строки отвечают за установку исходных name/job в  форму input
-        object.value = subtextProfile.textContent;
+function popupOpenEdit() {
+    popup.classList.add('popup_opened');
+
+    popupTitle.textContent = 'Редактировать профиль';
+    name.placeholder = 'ФИО';
+    object.placeholder = 'Призвание';
+    name.value = textProfile.textContent; // данные строки отвечают за установку исходных name/job в  форму input
+    object.value = subtextProfile.textContent;
+    // Прикрепляем обработчик к форме:
+    // он будет следить за событием “submit” - «отправка»
+     formElement.addEventListener('submit', formSubmitHandler);
 };
 
 
@@ -104,11 +114,13 @@ function popupClose() {
 // Открытие поп-ап нового места
 
 function popupOpenNewPlace() {
+    popupCleanValues();
     popup.classList.add('popup_opened');
 
-    titleProfile.textContent = 'Новое место';
-    nameInput.textContent = 'Название';
-    jobInput.textContent = 'Ccылка на картинку';
+    popupTitle.textContent = 'Новое место';
+    name.placeholder = 'Название';
+    object.placeholder = 'Ccылка на картинку';
+    formElement.addEventListener('submit', formAddhandler);
 };
 
 
@@ -129,18 +141,21 @@ function formSubmitHandler (evt) {
 
     textProfile.textContent = name.value; 
     subtextProfile.textContent = object.value;
+    popupClose();
+}
 
-
+// Обработчик добавления новых карточек.
+function formAddhandler (evt) {
+    evt.preventDefault();
+    cards.push( {name: name.value, link: object.value }); // хоспаде я еле вспомнил push и как pushить. спасибо тренажеру за это.
+    makeCards(cards[cards.length -1]);
 
     popupClose();
 }
 
-// Прикрепляем обработчик к форме:
-// он будет следить за событием “submit” - «отправка»
-formElement.addEventListener('submit', formSubmitHandler);
 
 // Слушатели поп-ап
 
-editButton.addEventListener ('click', popupOpen);
+editButton.addEventListener ('click', popupOpenEdit);
 closeButton.addEventListener ('click', popupClose);
 addButton.addEventListener ('click', popupOpenNewPlace);
