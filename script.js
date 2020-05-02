@@ -11,10 +11,9 @@ const name = document.querySelector('#name');
 const object = document.querySelector('#object');
 const popupTitle = document.querySelector('.popup__text');
 
-
 const cards = [
     {
-        name: 'Франция',
+        name: 'Париж',
         link: 'https://images.unsplash.com/photo-1562815243-3e7c83b4b4a8?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80'
     },
     {
@@ -120,7 +119,7 @@ function popupOpenNewPlace() {
     popupTitle.textContent = 'Новое место';
     name.placeholder = 'Название';
     object.placeholder = 'Ccылка на картинку';
-    formElement.addEventListener('submit', formAddhandler);
+    formElement.addEventListener('submit', formAddHandler);
 };
 
 
@@ -142,15 +141,19 @@ function formSubmitHandler (evt) {
     textProfile.textContent = name.value; 
     subtextProfile.textContent = object.value;
     popupClose();
+    formElement.removeEventListener("submit", formSubmitHandler);
+    formElement.removeEventListener("submit", formAddHandler);
 }
 
 // Обработчик добавления новых карточек.
-function formAddhandler (evt) {
+function formAddHandler (evt) {
     evt.preventDefault();
-    cards.push( {name: name.value, link: object.value }); // хоспаде я еле вспомнил push и как pushить. спасибо тренажеру за это.
+    cards.push( {name: name.value, link: object.value });
     makeCards(cards[cards.length -1]);
 
     popupClose();
+    formElement.removeEventListener("submit", formSubmitHandler);
+    formElement.removeEventListener("submit", formAddHandler);
 }
 
 

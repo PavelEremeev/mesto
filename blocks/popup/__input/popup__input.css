@@ -1,5 +1,4 @@
-@import URL(./_name/popup__input_name.css);
-@import URL(./_job/popup__input_job.css);
+
 
 .popup__input {
     font-weight: normal;
@@ -10,3 +9,9 @@
     margin-bottom: 20px;
     border-bottom: 1px solid rgba(0,0,0,.2);
 }
+
+@media screen and (max-width: 375px) {
+    .popup__input  {
+        font-size: 12px;
+    }
+    }    
