@@ -1,15 +1,16 @@
 // Задаем константы
 
-const popupEdit = document.querySelector('.popup');
+const popup = document.querySelector('.popup');
 const editButton = document.querySelector('.profile__edit-button');
 const closeButton = document.querySelector('.popup__close-button');
 const addButton = document.querySelector('.profile__add-button');
-const titleProfile = document.querySelector('.popup__text');
-const nameProfile = document.querySelector('.profile__text');
-const jobProfile = document.querySelector('.profile__subtext');
-const nameInput = document.querySelector('.popup__input_name');
-const jobInput = document.querySelector('.popup__input_job');
+const textProfile = document.querySelector('.profile__text');
+const subtextProfile = document.querySelector('.profile__subtext');
 const formElement = document.querySelector('.popup__form');
+const name = document.querySelector('#name');
+const object = document.querySelector('#object');
+const popupTitle = document.querySelector('.popup__text');
+
 
 const cards = [
     {
@@ -82,10 +83,12 @@ cards.forEach(makeCards);
 // Открытие поп-ап редактирования профиля
 
 function popupOpen() {
-        popupEdit.classList.add('popup_opened');
-
-        nameInput.value = nameProfile.textContent; // данные строки отвечают за установку исходных name/job в  форму input
-        jobInput.value = jobProfile.textContent;
+        popup.classList.add('popup_opened');
+        popupTitle.textContent = 'Редактировать профиль';
+        name.placeholder = 'ФИО';
+        object.placeholder = 'Призвание';
+        name.value = textProfile.textContent; // данные строки отвечают за установку исходных name/job в  форму input
+        object.value = subtextProfile.textContent;
 };
 
 
@@ -93,7 +96,7 @@ function popupOpen() {
 // Закрытие поп-ап редактирования профиля
 
 function popupClose() {
-    popupEdit.classList.remove('popup_opened');
+    popup.classList.remove('popup_opened');
 
 
 };
@@ -101,7 +104,7 @@ function popupClose() {
 // Открытие поп-ап нового места
 
 function popupOpenNewPlace() {
-    popupEdit.classList.add('popup_opened');
+    popup.classList.add('popup_opened');
 
     titleProfile.textContent = 'Новое место';
     nameInput.textContent = 'Название';
@@ -124,8 +127,8 @@ function formSubmitHandler (evt) {
 
     // Вставьте новые значения с помощью textContent
 
-    nameProfile.textContent = nameInput.value; 
-    jobProfile.textContent = jobInput.value;
+    textProfile.textContent = name.value; 
+    subtextProfile.textContent = object.value;
 
 
 
