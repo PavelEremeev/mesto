@@ -2,7 +2,7 @@
 .element__remove-button {
     background-image: url(../../../images/trashbox_button.svg);
     background-color: transparent;
-    width: 19px;
+    width: 18px;
     height: 20px;
     border: none;
     transition: ease-in .3s all;

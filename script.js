@@ -39,7 +39,8 @@ const cards = [
 ];
 
 
-// Добавление карточек
+
+// Добавление карточек(элементов)
 
 function makeCards(item) {
     const cardTemplate = document.querySelector('#card-template').content;
@@ -49,16 +50,29 @@ function makeCards(item) {
     cardElement.querySelector('.element__text').textContent = item.name;
     cardElement.querySelector('.element__image').src = item.link;
     
-// Включение лайков
 
-    cardElement.querySelector('.element__like-button').addEventListener ('click', function (evt) {
-        const eventTarget = evt.target
-        eventTarget.classList.toggle('element__like-button_active');
+
+    
+// Включение лайков
+    
+const likeButton = cardElement.querySelector('.element__like-button');
+
+    likeButton.addEventListener ('click', function () {
+
+    likeButton.classList.toggle('element__like-button_active');
     }); 
 
+// Удаление карточек(элементов)
+    
+const removeButton = cardElement.querySelector('.element__remove-button');
+
+    removeButton.addEventListener('click', function() {
+
+    deleteElement = removeButton.closest('.element');
+    deleteElement.remove();
+    });
+
     elements.append(cardElement);
-
-
 
 };
 
