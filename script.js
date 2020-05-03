@@ -4,6 +4,7 @@ const popup = document.querySelector('.popup');
 const editButton = document.querySelector('.profile__edit-button');
 const closeButton = document.querySelector('.popup__close-button');
 const addButton = document.querySelector('.profile__add-button');
+const submitButton = document.querySelector('.popup__submit-button');
 const textProfile = document.querySelector('.profile__text');
 const subtextProfile = document.querySelector('.profile__subtext');
 const formElement = document.querySelector('.popup__form');
@@ -110,6 +111,7 @@ function popupOpenEdit() {
     popupTitle.textContent = 'Редактировать профиль';
     name.placeholder = 'ФИО';
     object.placeholder = 'Призвание';
+    submitButton.textContent = 'Сохранить';
     name.value = textProfile.textContent; // данные строки отвечают за установку исходных name/job в  форму input
     object.value = subtextProfile.textContent;
     // Прикрепляем обработчик к форме:
@@ -134,6 +136,7 @@ function popupOpenNewPlace() {
     popup.classList.add('popup_opened');
 
     popupTitle.textContent = 'Новое место';
+    submitButton.textContent = 'Создать mesto';
     name.placeholder = 'Название';
     object.placeholder = 'Ccылка на картинку';
     formElement.addEventListener('submit', formAddHandler);

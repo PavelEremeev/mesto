@@ -3,7 +3,7 @@
     border: none;
     cursor: pointer;
     transition: linear .3s all;
-    width: 100%;
+    width: 358px;
     height: 50px;
     background-color: black;
     color: white;
@@ -20,6 +20,13 @@
     transition: linear .3s all;
 }
 
+@media screen and (max-width: 650px) {
+    .popup__submit-button  {
+        width: 250px;
+        height: 45px;
+    }
+    }
+    
 
 
 @media screen and (max-width: 375px) {
