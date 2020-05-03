@@ -12,8 +12,10 @@
     background-color:rgba(0,0,0, 0.8);
     top: 0;
     left: 0;  
-    display: none;
-    transition: all 1s ease-in-out;
+    display: flex;
+    visibility: hidden;
+    opacity: 0;
+    transition: visibility .5s linear, opacity .4s ease-in-out;
     align-items: center;
     justify-content: center;
 }

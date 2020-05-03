@@ -10,6 +10,11 @@ const formElement = document.querySelector('.popup__form');
 const name = document.querySelector('#name');
 const object = document.querySelector('#object');
 const popupTitle = document.querySelector('.popup__text');
+const popupZoom = document.querySelector('.popup-zoom');
+const popupZoomImage = document.querySelector('.popup-zoom__image');
+const popupZoomCaption = document.querySelector('.popup-zoom__caption');
+const popupZoomCloseButton = document.querySelector('.popup-zoom__close-button')
+
 
 const cards = [
     {
@@ -72,9 +77,21 @@ const removeButton = cardElement.querySelector('.element__remove-button');
     deleteElement.remove();
     });
 
+// Zoom карточки при нажатии
+
+const imageElement = cardElement.querySelector('.element__image');
+
+    imageElement.addEventListener('click', function() {
+    popupZoomImage.src = item.link;
+    popupZoomCaption.textContent = item.name;
+    popupZoom.classList.add('popup-zoom_opened');
+    });
+
     elements.prepend(cardElement);
 
 };
+
+
 
 cards.forEach(makeCards);
 
@@ -123,6 +140,19 @@ function popupOpenNewPlace() {
 };
 
 
+// Открытие поп-ап изображения
+
+function popupOpenZoom() {
+    popupZoom.classList.add('popup-zoom_opened');
+}
+
+
+// Открытие поп-ап изображения
+
+function popupZoomClose() {
+    popupZoom.classList.remove('popup-zoom_opened');
+}
+
 // Обработчик «отправки» формы, хотя пока
 // она никуда отправляться не будет
 function formSubmitHandler (evt) {
@@ -162,3 +192,4 @@ function formAddHandler (evt) {
 editButton.addEventListener ('click', popupOpenEdit);
 closeButton.addEventListener ('click', popupClose);
 addButton.addEventListener ('click', popupOpenNewPlace);
+popupZoomCloseButton.addEventListener ('click', popupZoomClose)
