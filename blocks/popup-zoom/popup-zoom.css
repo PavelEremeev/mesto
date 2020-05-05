@@ -1,7 +1,7 @@
-@import url(./popup-zoom__containter/popup-zoom__container.css);
-@import url(./popup-zoom__image/popup-zoom__image.css);
-@import url(./popup-zoom__close-button/popup-zoom__close-button.css);
-@import url(./popup-zoom__caption/popup-zoom__caption.css);
+@import url(./__containter/popup-zoom__container.css);
+@import url(./__image/popup-zoom__image.css);
+@import url(./__close-button/popup-zoom__close-button.css);
+@import url(./__caption/popup-zoom__caption.css);
 
 .popup-zoom {
     position: fixed;
@@ -12,8 +12,11 @@
     left: 0;  
     display: flex;
     visibility: hidden;
-    opacity: 0; 
-    transition: visibility .5s linear, opacity .4s ease-in-out; 
-    align-items: center; 
+    opacity: 0;
+    transition: visibility .5s linear, opacity .4s ease-in-out;
+    align-items: center;
     justify-content: center;
 }
+
+/* стили совпадают только у одного класса. сделал 3 поп-апа (как и просили)
+ если потребуется изменение стилей для каждого из них. */

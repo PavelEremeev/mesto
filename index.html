@@ -46,10 +46,21 @@
     <div class="popup__containter"> 
         <form class="popup__form">
             <button class="popup__close-button" type="button"></button>
-            <h2 class="popup__text"></h2>
-            <input class="popup__input"  type="text" id="name" placeholder="" required>
-            <input class="popup__input"  type="text" id="object" placeholder="" required>
-            <button class="popup__submit-button" type="submit"></button>
+            <h2 class="popup__text">Редактировать профиль</h2>
+            <input class="popup__input popup__input_name"  type="text" placeholder="Имя" required>
+            <input class="popup__input popup__input_job"  type="text" placeholder="Профессия" required>
+            <button class="popup__submit-button" type="submit">Сохранить</button>
+        </form>
+    </div>
+</div>
+<div class="popup_newplace popup">
+    <div class="popup__containter"> 
+        <form class="popup__form">
+            <button class="popup__close-button" type="button"></button>
+            <h2 class="popup__text popup__text_newplace">Новое mesto</h2>
+            <input class="popup__input popup__input_newplace_name"  type="text" placeholder="Название" required>
+            <input class="popup__input popup__input_newplace_link"  type="text" placeholder="Ссылка на картинку" required>
+            <button class="popup__submit-button" type="submit">Создать mesto</button>
         </form>
     </div>
 </div>

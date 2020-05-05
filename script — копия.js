@@ -1,7 +1,6 @@
 // Задаем константы
 
 const popup = document.querySelector('.popup');
-const elements = document.querySelector('.elements');
 const editButton = document.querySelector('.profile__edit-button');
 const closeButton = document.querySelector('.popup__close-button');
 const addButton = document.querySelector('.profile__add-button');
@@ -9,16 +8,13 @@ const submitButton = document.querySelector('.popup__submit-button');
 const textProfile = document.querySelector('.profile__text');
 const subtextProfile = document.querySelector('.profile__subtext');
 const formElement = document.querySelector('.popup__form');
-const name = document.querySelector('.popup__input_name');
-const job = document.querySelector('.popup__input_job');
+const name = document.querySelector('popup__input_name');
+const job = document.querySelector('popup__input_job');
 const popupTitle = document.querySelector('.popup__text');
 const popupZoom = document.querySelector('.popup-zoom');
 const popupZoomImage = document.querySelector('.popup-zoom__image');
 const popupZoomCaption = document.querySelector('.popup-zoom__caption');
-const popupZoomCloseButton = document.querySelector('.popup-zoom__close-button');
-const popupNewPlace = document.querySelector('.popup_newplace');
-const formElementPlace = document.querySelector('.popup__form_newplace');
-
+const popupZoomCloseButton = document.querySelector('.popup-zoom__close-button')
 
 
 const cards = [
@@ -86,30 +82,34 @@ function removeCard() {
 });
 }    
 
-// Zoom  (увеличения) карточки при нажатии
+// Zoom карточки при нажатии
 function imageZoom() {
     const imageElement = document.querySelector('.element__image');
-    popupZoomCloseButton.addEventListener ('click', popupZoomOpenClose);
     imageElement.addEventListener('click', function() {  
     popupZoomImage.src = imageElement.src;
     popupZoomCaption.textContent = imageElement.alt;
-    popupZoomOpenClose();     
+    popupZoom.classList.toggle('popup-zoom_opened');
 });
 }
 
-// Закрытие/открытие поп-ап Zoom (увеличения)
 
-function popupZoomOpenClose() {
-    popupZoom.classList.toggle('popup-zoom_opened');
+// Очищение значений в поп-ап
+function popupCleanValues() {
+    name.value = null;
+    object.value = null;
 }
 
+// Открытие поп-ап редактирования профиля
 
-// поп-ап редактирования профиля
+function popupOpenEdit() {
+    popup.classList.add('popup_opened');
 
-function popupEdit() {
-    popupEditOpenClose()
+    popupTitle.textContent = 'Редактировать профиль';
+    name.placeholder = 'ФИО';
+    object.placeholder = 'Призвание';
+    submitButton.textContent = 'Сохранить';
     name.value = textProfile.textContent; // данные строки отвечают за установку исходных name/job в  форму input
-    job.value = subtextProfile.textContent;
+    object.value = subtextProfile.textContent;
     // Прикрепляем обработчик к форме:
     // он будет следить за событием “submit” - «отправка»
      formElement.addEventListener('submit', formSubmitHandler);
@@ -117,24 +117,31 @@ function popupEdit() {
 
 
 
-// Закрытие/открытие поп-ап редактирования профиля
+// Закрытие поп-ап редактирования профиля
 
-function popupEditOpenClose() {
-    popup.classList.toggle('popup_opened');
+function popupClose() {
+    popup.classList.remove('popup_opened');
+
+
 };
 
 // Открытие поп-ап нового места
 
-function popupAddPlace() {
-    popupNewOpenClose()
-    formElementPlace.addEventListener('submit', formAddHandler);
+function popupOpenNewPlace() {
+    popupCleanValues();
+    popup.classList.add('popup_opened');
+    popupTitle.textContent = 'Новое место';
+    submitButton.textContent = 'Создать mesto';
+    name.placeholder = 'Название';
+    object.placeholder = 'Ccылка на картинку';
+    formElement.addEventListener('submit', formAddHandler);
 };
 
-// поп-ап нового места
+// Закрытие поп-ап изображения
 
-function popupNewOpenClose() {
-    popupNewPlace.classList.toggle('popup_opened');
-};
+function popupZoomClose() {
+    popupZoom.classList.remove('popup-zoom_opened');
+}
 
 // Обработчик «отправки» формы, хотя пока
 // она никуда отправляться не будет
@@ -152,22 +159,27 @@ function formSubmitHandler (evt) {
     // Вставьте новые значения с помощью textContent
 
     textProfile.textContent = name.value; 
-    subtextProfile.textContent = job.value;
-    popupEditOpenClose();
+    subtextProfile.textContent = object.value;
+    popupClose();
+    formElement.removeEventListener("submit", formSubmitHandler);
+    formElement.removeEventListener("submit", formAddHandler);
 }
 
 // Обработчик добавления новых карточек.
 function formAddHandler (evt) {
     evt.preventDefault();
-    //cards.push( {name: name.value, link: object.value });
-    //makeCards(cards[cards.length -1]);
-    const card = makeCards(name.value, link.value);
-    elements.prepend(card);
-    popupEditOpenClose();
+    cards.push( {name: name.value, link: object.value });
+    makeCards(cards[cards.length -1]);
+
+    popupClose();
+    formElement.removeEventListener("submit", formSubmitHandler);
+    formElement.removeEventListener("submit", formAddHandler);
 }
 
 
 // Слушатели поп-ап
-editButton.addEventListener ('click', popupEditOpenClose);
-closeButton.addEventListener ('click', popupEditOpenClose);
-addButton.addEventListener ('click', popupAddPlace);
+
+editButton.addEventListener ('click', popupOpenEdit);
+closeButton.addEventListener ('click', popupClose);
+addButton.addEventListener ('click', popupOpenNewPlace);
+popupZoomCloseButton.addEventListener ('click', popupZoomClose)
