@@ -45,7 +45,6 @@ const cards = [
 ];
 
 
-
 // Добавление карточек(элементов)
 
 function makeCards(item) {
@@ -55,46 +54,44 @@ function makeCards(item) {
 
     cardElement.querySelector('.element__text').textContent = item.name;
     cardElement.querySelector('.element__image').src = item.link;
-    
-
-
-    
-// Включение лайков
-    
-const likeButton = cardElement.querySelector('.element__like-button');
-
-    likeButton.addEventListener ('click', function () {
-
-    likeButton.classList.toggle('element__like-button_active');
-    }); 
-
-// Удаление карточек(элементов)
-    
-const removeButton = cardElement.querySelector('.element__remove-button');
-
-    removeButton.addEventListener('click', function() {
-
-    deleteElement = removeButton.closest('.element');
-    deleteElement.remove();
-    });
-
-// Zoom карточки при нажатии
-
-const imageElement = cardElement.querySelector('.element__image');
-
-    imageElement.addEventListener('click', function() {
-    popupZoomImage.src = item.link;
-    popupZoomCaption.textContent = item.name;
-    popupZoom.classList.add('popup-zoom_opened');
-    });
+    cardElement.querySelector('.element__image').alt = cardElement.querySelector('.element__text').textContent;
 
     elements.prepend(cardElement);
-
+    makeLikeActive();
+    removeCard();
+    imageZoom();
 };
 
-
-
 cards.forEach(makeCards);
+
+
+// Включение лайков
+function makeLikeActive() {
+    const likeButton = document.querySelector('.element__like-button');
+    likeButton.addEventListener('click', function () {
+    likeButton.classList.toggle('element__like-button_active');
+});
+}
+
+// Удаление карточек(элементов)
+function removeCard() {
+    const removeButton = document.querySelector('.element__remove-button'); 
+    removeButton.addEventListener('click', function() {
+    const deleteElement = removeButton.closest('.element');
+    deleteElement.remove();
+});
+}    
+
+// Zoom карточки при нажатии
+function imageZoom() {
+    const imageElement = document.querySelector('.element__image');
+    imageElement.addEventListener('click', function() {  
+    console.log(imageElement);
+    popupZoomImage.src = imageElement.src;
+    popupZoomCaption.textContent = imageElement.alt;
+    popupZoom.classList.toggle('popup-zoom_opened');
+});
+}
 
 
 // Очищение значений в поп-ап
@@ -142,15 +139,7 @@ function popupOpenNewPlace() {
     formElement.addEventListener('submit', formAddHandler);
 };
 
-
-// Открытие поп-ап изображения
-
-function popupOpenZoom() {
-    popupZoom.classList.add('popup-zoom_opened');
-}
-
-
-// Открытие поп-ап изображения
+// Закрытие поп-ап изображения
 
 function popupZoomClose() {
     popupZoom.classList.remove('popup-zoom_opened');
