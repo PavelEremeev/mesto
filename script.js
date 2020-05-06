@@ -4,6 +4,7 @@ const popup = document.querySelector('.popup');
 const elements = document.querySelector('.elements');
 const editButton = document.querySelector('.profile__edit-button');
 const closeButton = document.querySelector('.popup__close-button');
+const closeButtonPlace = document.querySelector('.popup__close-button_newplace');
 const addButton = document.querySelector('.profile__add-button');
 const submitButton = document.querySelector('.popup__submit-button');
 const textProfile = document.querySelector('.profile__text');
@@ -168,6 +169,7 @@ function formAddHandler (evt) {
 
 
 // Слушатели поп-ап
-editButton.addEventListener ('click', popupEditOpenClose);
+editButton.addEventListener ('click', popupEdit);
 closeButton.addEventListener ('click', popupEditOpenClose);
 addButton.addEventListener ('click', popupAddPlace);
+closeButtonPlace.addEventListener('click', popupNewOpenClose);
