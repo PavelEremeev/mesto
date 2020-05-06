@@ -69,6 +69,7 @@ function makeCards(item) {
     imageZoom();
 };
 
+
 cards.forEach(makeCards);
 
 
@@ -166,14 +167,13 @@ function formSubmitHandler (evt) {
 // Обработчик добавления новых карточек.
 function formAddHandler (evt) {
     evt.preventDefault();
-    //cards.push( {name: name.value, link: object.value });
-    //makeCards(cards[cards.length -1]);
-    const card = makeCards(placeInput.value , linkInput.value);
+    const card = makeCards( { name: placeInput.value, link: linkInput.value} );
     elements.append(card);
 
-    placeInput.value = '';
-    linkInput.value = '';
-    popupAddPlaceOpenClose()
+    placeInput.value = null;
+    linkInput.value = null;
+
+    popupAddPlaceOpenClose();
 }
 
 
