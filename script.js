@@ -19,6 +19,8 @@ const popupZoomCaption = document.querySelector('.popup-zoom__caption');
 const popupZoomCloseButton = document.querySelector('.popup-zoom__close-button');
 const popupNewPlace = document.querySelector('.popup_newplace');
 const formElementPlace = document.querySelector('.popup__form_newplace');
+const placeInput = document.querySelector('.popup__input_newplace_name');
+const linkInput = document.querySelector('.popup__input_newplace_link');
 
 
 
@@ -122,19 +124,23 @@ function popupEdit() {
 
 function popupEditOpenClose() {
     popup.classList.toggle('popup_opened');
+
+
 };
 
 // Открытие поп-ап нового места
 
 function popupAddPlace() {
-    popupNewOpenClose()
+    popupAddPlaceOpenClose()
     formElementPlace.addEventListener('submit', formAddHandler);
+
 };
 
 // поп-ап нового места
 
-function popupNewOpenClose() {
+function popupAddPlaceOpenClose() {
     popupNewPlace.classList.toggle('popup_opened');
+
 };
 
 // Обработчик «отправки» формы, хотя пока
@@ -162,9 +168,12 @@ function formAddHandler (evt) {
     evt.preventDefault();
     //cards.push( {name: name.value, link: object.value });
     //makeCards(cards[cards.length -1]);
-    const card = makeCards(name.value, link.value);
-    elements.prepend(card);
-    popupEditOpenClose();
+    const card = makeCards(placeInput.value , linkInput.value);
+    elements.append(card);
+
+    placeInput.value = '';
+    linkInput.value = '';
+    popupAddPlaceOpenClose()
 }
 
 
@@ -172,4 +181,4 @@ function formAddHandler (evt) {
 editButton.addEventListener ('click', popupEdit);
 closeButton.addEventListener ('click', popupEditOpenClose);
 addButton.addEventListener ('click', popupAddPlace);
-closeButtonPlace.addEventListener('click', popupNewOpenClose);
+closeButtonPlace.addEventListener('click', popupAddPlaceOpenClose);
