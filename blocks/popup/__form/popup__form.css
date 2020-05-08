@@ -1,7 +1,11 @@
-@import url(./_newplace/popup__form_newplace.css);
+@import url(./_new-place/popup__form_new-place.css);
 
 .popup__form {
-    max-width: 358px;
+    max-width: 430px;
+    max-height: 330px;
+    background: #FFFFFF;
+    border-radius: 10px;
+    padding: 35px;
     margin: 34px 36px 36px;
     position: relative;
     display: flex;
@@ -11,6 +15,6 @@
 
 @media screen and (max-width: 375px) {
     .popup__form  {
-        margin: 20px;
+        margin: 30px;
     }
     }    
