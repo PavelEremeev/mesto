@@ -10,8 +10,8 @@ const submitButton = document.querySelector('.popup__submit-button');
 const textProfile = document.querySelector('.profile__text');
 const subtextProfile = document.querySelector('.profile__subtext');
 const formElement = document.querySelector('.popup__form');
-const name = document.querySelector('.popup__input_name');
-const job = document.querySelector('.popup__input_job');
+const nameInput = document.querySelector('.popup__input_name');
+const jobInput = document.querySelector('.popup__input_job');
 const popupTitle = document.querySelector('.popup__text');
 const popupZoom = document.querySelector('.popup_zoom');
 const popupImage = document.querySelector('.popup__image');
@@ -53,8 +53,8 @@ const cards = [
 
 // Закрытие/открытие поп-ап
 
-function OpenClosePopup(event) {
-    event.classList.toggle('popup_opened');
+function OpenClosePopup(popupName) {
+    popupName.classList.toggle('popup_opened'); 
 }
 
 // Включение лайков
@@ -69,15 +69,15 @@ function handleRemoveButtonClick(event) {
 }    
 
 // Zoom  (Увеличение) карточки при нажатии
-function handleImageElementClick(event) {
+function handleImageElementClick(imageElement) {
     OpenClosePopup(popupZoom);
 
-    popupImage.src = event.src;
-    popupCaption.textContent = event.alt;
+    popupImage.src = imageElement.src;
+    popupCaption.textContent = imageElement.alt;
    
 }
 
-// Добавление карточек(элементов)
+// Создание карточки (элемента)
 
 function createCard(item) {
     const cardTemplate = document.querySelector('#card-template').content;
@@ -100,44 +100,30 @@ function createCard(item) {
 
 }
 
+// Добавление карточки (элемента)
+
 function addCard(cardElement) {
     elements.prepend(createCard(cardElement));   
 }
 
+// Перебор посредством forEach
+
 cards.forEach(cardElement => addCard(cardElement));
-
-
 
 // поп-ап редактирования профиля
 
-function popupEdit() {
-    popupEditOpenClose()
-    name.value = textProfile.textContent; // данные строки отвечают за установку исходных name/job в  форму input
-    job.value = subtextProfile.textContent;
-    // Прикрепляем обработчик к форме:
-    // он будет следить за событием “submit” - «отправка»
-     formElement.addEventListener('submit', formSubmitHandler);
-}
-
-
-
-// Закрытие/открытие поп-ап редактирования профиля
-
-function popupEditOpenClose() {
-    popup.classList.toggle('popup_opened');
+function editPopup() {
+    OpenClosePopup(popup);
+    nameInput.value = textProfile.textContent; // данные строки отвечают за установку исходных name/job в  форму input
+    jobInput.value = subtextProfile.textContent;
 }
 
 // Открытие поп-ап нового места
 
-function popupAddPlace() {
-    popupAddPlaceOpenClose()
-    formElementNewPlace.addEventListener('submit', formAddHandler);
-}
-
-// поп-ап нового места
-
-function popupAddPlaceOpenClose() {
-    popupNewPlace.classList.toggle('popup_opened');
+function editPopupNewPlace() {
+    OpenClosePopup(popupNewPlace);
+    placeInput.value = null;
+    linkInput.value = null;
 }
 
 // Обработчик «отправки» формы, хотя пока
@@ -155,27 +141,30 @@ function formSubmitHandler (evt) {
 
     // Вставьте новые значения с помощью textContent
 
-    textProfile.textContent = name.value; 
-    subtextProfile.textContent = job.value;
-    popupEditOpenClose();
+    textProfile.textContent = nameInput.value; 
+    subtextProfile.textContent = jobInput.value;
+    OpenClosePopup(popup);
 }
 
 // Обработчик добавления новых карточек.
 function formAddHandler (evt) {
     evt.preventDefault();
-    const card = createCards( { name: placeInput.value, link: linkInput.value} );
-    elements.append(card);
+    const card = createCard( { name: placeInput.value, link: linkInput.value} );
+    elements.prepend(card);
 
-    placeInput.value = null;
-    linkInput.value = null;
-
-    popupAddPlaceOpenClose();
+    OpenClosePopup(popupNewPlace);
 }
 
+// Cлушатели сабмитов
+formElement.addEventListener('submit', formSubmitHandler);
+formElementNewPlace.addEventListener('submit', formAddHandler);
 
-// Слушатели поп-ап
-editButton.addEventListener ('click', popupEdit);
-closeButton.addEventListener ('click', popupEditOpenClose);
-addButton.addEventListener ('click', popupAddPlace);
-closeButtonNewPlace.addEventListener('click', popupAddPlaceOpenClose);
-closeButtonZoom.addEventListener ('click', OpenClosePopupZoom);
+// Слушатели 
+editButton.addEventListener ('click', editPopup);
+closeButton.addEventListener ('click', editPopup);
+addButton.addEventListener ('click', editPopupNewPlace);
+closeButtonNewPlace.addEventListener('click', editPopupNewPlace);
+closeButtonZoom.addEventListener ('click', function() {
+    OpenClosePopup(popupZoom);
+});
+ 
