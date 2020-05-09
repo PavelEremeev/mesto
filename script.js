@@ -53,7 +53,7 @@ const cards = [
 
 // Закрытие/открытие поп-ап
 
-function OpenClosePopup(popupName) {
+function openClosePopup(popupName) {
     popupName.classList.toggle('popup_opened'); 
 }
 
@@ -70,7 +70,7 @@ function handleRemoveButtonClick(event) {
 
 // Zoom  (Увеличение) карточки при нажатии
 function handleImageElementClick(imageElement) {
-    OpenClosePopup(popupZoom);
+    openClosePopup(popupZoom);
 
     popupImage.src = imageElement.src;
     popupCaption.textContent = imageElement.alt;
@@ -94,7 +94,7 @@ function createCard(item) {
     removeButton.addEventListener('click', handleRemoveButtonClick);
 
     const imageElement = cardElement.querySelector('.element__image');
-    imageElement.addEventListener('click', (OpenClosePopup) => handleImageElementClick(imageElement));
+    imageElement.addEventListener('click', (openClosePopup) => handleImageElementClick(imageElement));
 
     return cardElement;
 
@@ -113,7 +113,7 @@ cards.forEach(cardElement => addCard(cardElement));
 // поп-ап редактирования профиля
 
 function editPopup() {
-    OpenClosePopup(popup);
+    openClosePopup(popup);
     nameInput.value = textProfile.textContent; // данные строки отвечают за установку исходных name/job в  форму input
     jobInput.value = subtextProfile.textContent;
 }
@@ -121,7 +121,7 @@ function editPopup() {
 // Открытие поп-ап нового места
 
 function editPopupNewPlace() {
-    OpenClosePopup(popupNewPlace);
+    openClosePopup(popupNewPlace);
     placeInput.value = null;
     linkInput.value = null;
 }
@@ -143,7 +143,7 @@ function formSubmitHandler (evt) {
 
     textProfile.textContent = nameInput.value; 
     subtextProfile.textContent = jobInput.value;
-    OpenClosePopup(popup);
+    openClosePopup(popup);
 }
 
 // Обработчик добавления новых карточек.
@@ -152,7 +152,7 @@ function formAddHandler (evt) {
     const card = createCard( { name: placeInput.value, link: linkInput.value} );
     elements.prepend(card);
 
-    OpenClosePopup(popupNewPlace);
+    openClosePopup(popupNewPlace);
 }
 
 // Cлушатели сабмитов
@@ -165,6 +165,6 @@ closeButton.addEventListener ('click', editPopup);
 addButton.addEventListener ('click', editPopupNewPlace);
 closeButtonNewPlace.addEventListener('click', editPopupNewPlace);
 closeButtonZoom.addEventListener ('click', function() {
-    OpenClosePopup(popupZoom);
+    openClosePopup(popupZoom);
 });
  
