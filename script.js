@@ -1,28 +1,26 @@
-// Задаем константы
+// Задаем переменные
 
-const popup = document.querySelector('.popup');
 const elements = document.querySelector('.elements');
 const editButton = document.querySelector('.profile__edit-button');
 const closeButton = document.querySelector('.popup__close-button');
 const closeButtonNewPlace = document.querySelector('.popup__close-button_new-place');
+const closeButtonZoom = document.querySelector('.popup__close-button_zoom');
 const addButton = document.querySelector('.profile__add-button');
 const submitButton = document.querySelector('.popup__submit-button');
 const textProfile = document.querySelector('.profile__text');
 const subtextProfile = document.querySelector('.profile__subtext');
-const formElement = document.querySelector('.popup__form');
 const nameInput = document.querySelector('.popup__input_name');
 const jobInput = document.querySelector('.popup__input_job');
+const placeInput = document.querySelector('.popup__input_new-place_name');
+const linkInput = document.querySelector('.popup__input_new-place_link');
+const popup = document.querySelector('.popup');
 const popupTitle = document.querySelector('.popup__text');
 const popupZoom = document.querySelector('.popup_zoom');
 const popupImage = document.querySelector('.popup__image');
 const popupCaption = document.querySelector('.popup__caption');
-const closeButtonZoom = document.querySelector('.popup__close-button_zoom');
 const popupNewPlace = document.querySelector('.popup_new-place');
+const formElement = document.querySelector('.popup__form');
 const formElementNewPlace = document.querySelector('.popup__form_new-place');
-const placeInput = document.querySelector('.popup__input_new-place_name');
-const linkInput = document.querySelector('.popup__input_new-place_link');
-
-
 const cards = [
     {
         name: 'Париж',
@@ -55,18 +53,18 @@ const cards = [
 
 function openClosePopup(popupName) {
     popupName.classList.toggle('popup_opened'); 
-}
+};
 
 // Включение лайков
 function handleLikeButtonClick(event) {
     event.target.classList.toggle('element__like-button_active');
-}
+};
 
 // Удаление карточек(элементов)
 function handleRemoveButtonClick(event) {
     const deleteElement = event.target.closest('.element');
     deleteElement.remove();
-}    
+};   
 
 // Zoom  (Увеличение) карточки при нажатии
 function handleImageElementClick(imageElement) {
@@ -75,7 +73,7 @@ function handleImageElementClick(imageElement) {
     popupImage.src = imageElement.src;
     popupCaption.textContent = imageElement.alt;
    
-}
+};
 
 // Создание карточки (элемента)
 
@@ -98,13 +96,13 @@ function createCard(item) {
 
     return cardElement;
 
-}
+};
 
 // Добавление карточки (элемента)
 
 function addCard(cardElement) {
     elements.prepend(createCard(cardElement));   
-}
+};
 
 // Перебор посредством forEach
 
@@ -116,7 +114,7 @@ function editPopup() {
     openClosePopup(popup);
     nameInput.value = textProfile.textContent; // данные строки отвечают за установку исходных name/job в  форму input
     jobInput.value = subtextProfile.textContent;
-}
+};
 
 // Открытие поп-ап нового места
 
@@ -124,7 +122,7 @@ function editPopupNewPlace() {
     openClosePopup(popupNewPlace);
     placeInput.value = null;
     linkInput.value = null;
-}
+};
 
 // Обработчик «отправки» формы, хотя пока
 // она никуда отправляться не будет
@@ -144,7 +142,7 @@ function formSubmitHandler (evt) {
     textProfile.textContent = nameInput.value; 
     subtextProfile.textContent = jobInput.value;
     openClosePopup(popup);
-}
+};
 
 // Обработчик добавления новых карточек.
 function formAddHandler (evt) {
@@ -153,7 +151,7 @@ function formAddHandler (evt) {
     elements.prepend(card);
 
     openClosePopup(popupNewPlace);
-}
+};
 
 // Cлушатели сабмитов
 formElement.addEventListener('submit', formSubmitHandler);
