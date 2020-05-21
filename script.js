@@ -170,25 +170,9 @@ function formAddHandler (evt) {
     evt.preventDefault();
     const card = createCard( { name: placeInput.value, link: linkInput.value} );
     elements.prepend(card);
-
     closePopup(popupNewPlace);
 };
 
-
-// Обработчик добавления новых карточек.
-function formAddHandlerAtEnter (evt) {
-    if (evt.key === 'Enter') {
-        enableValidation({
-            formSelector: '.popup__form',
-            inputSelector: '.popup__input',
-            submitButtonSelector: '.popup__submit-button',
-            inactiveButtonClass: '.popup__submit-button_inactive',
-            inputErrorClass: 'popup__input_type_error',
-            errorClass: 'popup__input-error_active'
-          });
-        formAddHandler(evt);
-    }
-};
 
 // Cлушатели сабмитов
 formElement.addEventListener('submit', formSubmitHandler);
@@ -216,5 +200,3 @@ popupNewPlace.addEventListener('click', (evt) => {
     closePopup(evt.target);
 });
 document.addEventListener('keydown', closePopupAtEscape);
-placeInput.addEventListener('keydown' , formAddHandlerAtEnter);
-linkInput.addEventListener('keydown' , formAddHandlerAtEnter);

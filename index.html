@@ -46,9 +46,10 @@
         <form class="popup__form" novalidate>
             <button class="popup__close-button" type="button"></button>
             <h2 class="popup__text">Редактировать профиль</h2>
-            <input class="popup__input popup__input_name" id="name-input"  type="text" placeholder="Имя" required minlength="2" maxlength="40">
+            <input class="popup__input popup__input_name" pattern="[a-zA-ZА-ЯЁа-яё\s\-]+[^\s\-]+"
+            id="name-input"  type="text" placeholder="Имя" required minlength="2" maxlength="40">
             <span class="popup__input-error" id="name-input-error"></span>
-            <input class="popup__input popup__input_job" id="job-input" type="text" placeholder="Профессия" required minlength="2" maxlength="200">
+            <input class="popup__input popup__input_job" id="job-input" type="text" pattern="[a-zA-ZА-ЯЁа-яё\s\-]+[^\s\-]+" placeholder="Профессия" required minlength="2" maxlength="200">
             <span class="popup__input-error" id="job-input-error"></span>
             <button class="popup__submit-button" type="submit">Сохранить</button>
         </form>
