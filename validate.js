@@ -14,6 +14,9 @@ const hideInputError = (formElement, inputElement) => {
     errorElement.textContent = null;
 };
 
+//
+
+
 // Проверка ввода на валидность
 
 const checkInputValidity = (formElement, inputElement) => {
@@ -59,6 +62,26 @@ const setEventListeners = (formElement) => {
     });
 };
 
+// Включение валидации всего
+const enableValidation = ({...str}) => {
+    const formSelector = str.formSelector;
+    const inputSelector = str.inputSelector;
+    const submitButtonSelector = str.submitButtonSelector;
+    const inactiveButtonClass = str.inactiveButtonClass;
+    const inputErrorClass = str.inputErrorClass;
+    const errorClass = str.errorClass;
+    const formList = Array.from(document.querySelectorAll(formSelector));
+    formList.forEach ((formElement) => {
+        formElement.addEventListener('submit', (evt) => {
+            evt.preventDefault();
+        });
+        setEventListeners(formElement, inputSelector, submitButtonSelector,
+         inactiveButtonClass, inputErrorClass, errorClass );
+    });
+};
+
+// включение валидации вызовом enableValidation
+// все настройки передаются при вызове
 enableValidation({
     formSelector: '.popup__form',
     inputSelector: '.popup__input',
@@ -68,19 +91,4 @@ enableValidation({
     errorClass: 'popup__input-error_active'
   });
 
-
-
-// Включение валидации всего
-const enableValidation = () => {
-    const formList = Array.from(document.querySelectorAll('.popup__form'));
-    formList.forEach ((formElement) => {
-        formElement.addEventListener('submit', (evt) => {
-            evt.preventDefault();
-        });
-        setEventListeners(formElement);
-    });
-};
-
-// включение валидации вызовом enableValidation
-// все настройки передаются при вызове
 

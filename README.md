@@ -15,4 +15,5 @@ This is demosntration card-website. The site is creating using by Figma layout f
 
 This is my 4th project. In this project i using:
 0) Flexible and Grid responsive/adaptive layout;
-1) Javascript in form - my first little steps. ;)
+1) Javascript in popup's;
+1.1) Validation and some features with Javascript;
