@@ -14,11 +14,8 @@ const hideInputError = (formElement, inputElement) => {
     errorElement.textContent = null;
 };
 
-//
-
 
 // Проверка ввода на валидность
-
 const checkInputValidity = (formElement, inputElement) => {
     if (!inputElement.validity.valid) {
         showInputError(formElement,inputElement, inputElement.validationMessage);
