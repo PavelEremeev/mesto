@@ -4,7 +4,8 @@ const validationConfig = {
     submitButtonSelector: '.popup__submit-button',
     inactiveButtonClass: 'popup__submit-button_inactive',
     inputErrorClass: 'popup__input_type_error',
-    errorClass: 'popup__input-error_active'
+    inputErrorSelector: '.popup__input_type_error',
+    errorClass: 'popup__input-error_active' 
 };
 
 // Добавляем класс ошибки элементу input
@@ -16,20 +17,18 @@ const showInputError = (formElement, inputElement, errorMessage, config) => {
 };
 
 // Удаляем класс ошибки элементу input
-//const hideInputError = (formElement, inputElement, config) => {
-//    const errorElement = formElement.querySelector(`#${inputElement.id}-error`);
-//    inputElement.classList.remove(config.inputErrorClass);
-//    errorElement.classList.remove(config.errorClass);
-//    errorElement.textContent = null;
-//    
-//};
+const hideInputError = (formElement, inputElement, config) => {
+    const errorElement = formElement.querySelector(`#${inputElement.id}-error`);
+    inputElement.classList.remove(config.inputErrorClass);
+    errorElement.classList.remove(config.errorClass);
+    errorElement.textContent = null;    
+};
 
-const hideInputError = (formElement, config) => {
-    const allErrors = formElement.querySelectorAll(config.errorClass);
-    const allInputs = formElement.querySelectorAll(config.inputSelector);
+// Удаляем ошибки input при повторном открытии
+const hideInputErrors = (formElement, config) => {
+    const allErroredInputs = formElement.querySelectorAll(config.inputErrorSelector);
 
-    allErrors.forEach((item) => item.textContent = ''); 
-    allInputs.forEach((item) => item.classList.remove(config.inputErrorClass));
+    allErroredInputs.forEach((item) => hideInputError(formElement, item, config));
 };
 
 // Проверка ввода на валидность
@@ -41,7 +40,6 @@ const checkInputValidity = (formElement, inputElement, config) => {
     }
 };
 
-
 const hasInvalidInput = (inputList) => {
     return inputList.some((inputElement) => {
     // Если поле не валидно, вернёт true
@@ -52,7 +50,6 @@ const hasInvalidInput = (inputList) => {
 
 };
 
-
 //  Изменение состояниея кнопки в зависимости от валидности
 const toggleButtonState = (inputList, buttonElement, config) => {
     if (hasInvalidInput(inputList)) {
@@ -61,6 +58,14 @@ const toggleButtonState = (inputList, buttonElement, config) => {
     } else {
         buttonElement.classList.remove(config.inactiveButtonClass);
         buttonElement.disabled = false;
+    }
+};
+
+const setButtonState = (buttonElement, config, isActive) => {
+    if (isActive === true) {
+        buttonElement.classList.remove(config.inactiveButtonClass);
+    } else {
+        buttonElement.classList.add(config.inactiveButtonClass);
     }
 };
 

@@ -1,6 +1,7 @@
 // Задаем переменные
 
 const elements = document.querySelector('.elements');
+const submitButton = document.querySelector('.popup__submit-button')
 const editButton = document.querySelector('.profile__edit-button');
 const closeButton = document.querySelector('.popup__close-button');
 const closeButtonNewPlace = document.querySelector('.popup__close-button_new-place');
@@ -60,7 +61,7 @@ function openPopup(popupName) {
 
 function closePopup(popupName) {
     removePopupCloseEvents();
-    hideInputError(formElement, validationConfig)
+    hideInputErrors(formElement, validationConfig);
     popupName.classList.remove('popup_opened');
 };
 
@@ -139,12 +140,7 @@ function editPopup() {
     nameInput.value = textProfile.textContent; // данные строки отвечают за установку исходных name/job в  форму input
     jobInput.value = subtextProfile.textContent;
     addPopupCloseEvents();
-
-   // const inputList = Array.from(formElement.querySelectorAll(config.inputSelector));
-   // const buttonElement = formElement.querySelector(config.submitButtonSelector);
-   // toggleButtonState(inputList, buttonElement, validationConfig);
-
-
+    setButtonState(submitButton, validationConfig);
     openPopup(popup);
 };
 
@@ -154,6 +150,7 @@ function editPopupNewPlace() {
     placeInput.value = null;
     linkInput.value = null;
     addPopupCloseEvents();
+    setButtonState(submitButton, validationConfig);
     openPopup(popupNewPlace);
 };
 
@@ -183,7 +180,6 @@ function formAddHandler (evt) {
     const card = createCard( { name: placeInput.value, link: linkInput.value} );
     elements.prepend(card);
     closePopup(popupNewPlace);
-    toggleButtonState(validationConfig);
 };
 
 // Добавление  слушателей Esc и оверлей
