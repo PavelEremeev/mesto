@@ -92,12 +92,10 @@ function handleRemoveButtonClick(event) {
 
 // Zoom  (Увеличение) карточки при нажатии
 function handleImageElementClick(imageElement) {
-    addPopupCloseEvents();
-    openPopup(popupZoom);
-
     popupImage.src = imageElement.src;
     popupCaption.textContent = imageElement.alt;
-   
+    addPopupCloseEvents();
+    openPopup(popupZoom);
 };
 
 // Создание карточки (элемента)
@@ -138,20 +136,19 @@ cards.forEach(cardElement => addCard(cardElement));
 // поп-ап редактирования профиля
 
 function editPopup() {
-    addPopupCloseEvents();
-    hideInputError(formElement, inputList);
-    openPopup(popup);
     nameInput.value = textProfile.textContent; // данные строки отвечают за установку исходных name/job в  форму input
     jobInput.value = subtextProfile.textContent;
+    addPopupCloseEvents();
+    openPopup(popup);
 };
 
 // Открытие поп-ап нового места
 
 function editPopupNewPlace() {
-    addPopupCloseEvents();
-    openPopup(popupNewPlace);
     placeInput.value = null;
     linkInput.value = null;
+    addPopupCloseEvents();
+    openPopup(popupNewPlace);
 };
 
 // Обработчик «отправки» формы, хотя пока
@@ -180,6 +177,7 @@ function formAddHandler (evt) {
     const card = createCard( { name: placeInput.value, link: linkInput.value} );
     elements.prepend(card);
     closePopup(popupNewPlace);
+
 };
 
 // Добавление  слушателей Esc и оверлей
