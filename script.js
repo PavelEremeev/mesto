@@ -60,6 +60,7 @@ function openPopup(popupName) {
 
 function closePopup(popupName) {
     removePopupCloseEvents();
+    hideInputError(formElement, validationConfig)
     popupName.classList.remove('popup_opened');
 };
 
@@ -102,19 +103,18 @@ function handleImageElementClick(imageElement) {
 
 function createCard(item) {
     const cardElement = cardTemplate.cloneNode(true);
-
-    cardElement.querySelector('.element__text').textContent = item.name;
-    cardElement.querySelector('.element__image').src = item.link;
-    cardElement.querySelector('.element__image').alt = cardElement.querySelector('.element__text').textContent;
-
+    const cardElementImage = cardElement.querySelector('.element__image');
+    const cardElementText = cardElement.querySelector('.element__text');
     const likeButton = cardElement.querySelector('.element__like-button');
-    likeButton.addEventListener('click', handleLikeButtonClick);
-    
-    const removeButton = cardElement.querySelector('.element__remove-button'); 
-    removeButton.addEventListener('click', handleRemoveButtonClick);
+    const removeButton = cardElement.querySelector('.element__remove-button');
 
-    const imageElement = cardElement.querySelector('.element__image');
-    imageElement.addEventListener('click', () => handleImageElementClick(imageElement));
+    cardElementText.textContent = item.name;
+    cardElementImage.src = item.link;
+    cardElementImage.alt = cardElementText.textContent;
+
+    likeButton.addEventListener('click', handleLikeButtonClick);
+    removeButton.addEventListener('click', handleRemoveButtonClick);
+    cardElementImage.addEventListener('click', () => handleImageElementClick(cardElementImage));
 
     return cardElement;
 
@@ -139,6 +139,12 @@ function editPopup() {
     nameInput.value = textProfile.textContent; // данные строки отвечают за установку исходных name/job в  форму input
     jobInput.value = subtextProfile.textContent;
     addPopupCloseEvents();
+
+   // const inputList = Array.from(formElement.querySelectorAll(config.inputSelector));
+   // const buttonElement = formElement.querySelector(config.submitButtonSelector);
+   // toggleButtonState(inputList, buttonElement, validationConfig);
+
+
     openPopup(popup);
 };
 
@@ -177,7 +183,7 @@ function formAddHandler (evt) {
     const card = createCard( { name: placeInput.value, link: linkInput.value} );
     elements.prepend(card);
     closePopup(popupNewPlace);
-
+    toggleButtonState(validationConfig);
 };
 
 // Добавление  слушателей Esc и оверлей
