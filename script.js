@@ -53,6 +53,7 @@ const cards = [
 // Открытие поп-ап
 
 function openPopup(popupName) {
+    setButtonInactive(submitButton, validationConfig);
     popupName.classList.add('popup_opened');
 
 };
@@ -140,7 +141,6 @@ function editPopup() {
     nameInput.value = textProfile.textContent; // данные строки отвечают за установку исходных name/job в  форму input
     jobInput.value = subtextProfile.textContent;
     addPopupCloseEvents();
-    setButtonState(submitButton, validationConfig);
     openPopup(popup);
 };
 
@@ -150,7 +150,7 @@ function editPopupNewPlace() {
     placeInput.value = null;
     linkInput.value = null;
     addPopupCloseEvents();
-    setButtonState(submitButton, validationConfig);
+
     openPopup(popupNewPlace);
 };
 

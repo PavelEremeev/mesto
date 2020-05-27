@@ -61,13 +61,10 @@ const toggleButtonState = (inputList, buttonElement, config) => {
     }
 };
 
-const setButtonState = (buttonElement, config, isActive) => {
-    if (isActive === true) {
-        buttonElement.classList.remove(config.inactiveButtonClass);
-    } else {
-        buttonElement.classList.add(config.inactiveButtonClass);
-    }
-};
+const setButtonInactive = (buttonElement, config) => {
+    buttonElement.classList.add(config.inactiveButtonClass);
+    buttonElement.disabled = true;
+}
 
 // Слушатели для формы
 const setEventListeners = (formElement, config) => {
