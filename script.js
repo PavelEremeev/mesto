@@ -1,5 +1,4 @@
 // Задаем переменные
-
 const elements = document.querySelector('.elements');
 const submitButton = document.querySelector('.popup__submit-button')
 const editButton = document.querySelector('.profile__edit-button');
@@ -14,7 +13,6 @@ const jobInput = document.querySelector('.popup__input_job');
 const placeInput = document.querySelector('.popup__input_new-place_name');
 const linkInput = document.querySelector('.popup__input_new-place_link');
 const popup = document.querySelector('.popup');
-const popupInput = document.querySelectorAll('.popup__input');
 const popupZoom = document.querySelector('.popup_zoom');
 const popupImage = document.querySelector('.popup__image');
 const popupCaption = document.querySelector('.popup__caption');
@@ -51,33 +49,29 @@ const cards = [
 
 
 // Открытие поп-ап
-
 function openPopup(popupName) {
-    setButtonInactive(submitButton, validationConfig);
+    addPopupCloseEvents();
     popupName.classList.add('popup_opened');
-
 };
 
 // Закрытие поп-ап
-
 function closePopup(popupName) {
     removePopupCloseEvents();
-    hideInputErrors(formElement, validationConfig);
     popupName.classList.remove('popup_opened');
 };
 
 //  Закрытие по нажатию на Esc и оверлей
-
-function closePopupAtEvent(evt) {
+function closePopupAtEsc(evt) {
     if (evt.key === 'Escape') {
         closePopup(document.querySelector('.popup_opened'));   
     }
+};
+
+function closePopupAtOverlay(evt) {
     if (evt.target.classList.contains('popup')) {
         closePopup(evt.target);
     }
 };
-
-
 
 // Включение лайков
 function handleLikeButtonClick(event) {
@@ -87,9 +81,7 @@ function handleLikeButtonClick(event) {
 // Удаление карточек(элементов)
 function handleRemoveButtonClick(event) {
     const deleteElement = event.target.closest('.element');
-    deleteElement.querySelector('.element__like-button').removeEventListener('click', handleLikeButtonClick);
-    deleteElement.querySelector('.element__remove-button').removeEventListener('click', handleRemoveButtonClick);
-    deleteElement.querySelector('.element__image').removeEventListener('click', () => handleImageElementClick(imageElement));
+    // Не хватает мозгов исправить ситуацию со снятием слушателей с анонимными функциями :( 
     deleteElement.remove();
 };   
 
@@ -102,7 +94,6 @@ function handleImageElementClick(imageElement) {
 };
 
 // Создание карточки (элемента)
-
 function createCard(item) {
     const cardElement = cardTemplate.cloneNode(true);
     const cardElementImage = cardElement.querySelector('.element__image');
@@ -123,52 +114,34 @@ function createCard(item) {
 };
 
 // Добавление карточки (элемента)
-
 function addCard(cardElement) {
     elements.prepend(createCard(cardElement));   
 };
 
 // Перебор посредством forEach
-
 cards.forEach(cardElement => addCard(cardElement));
 
-
-
-
 // поп-ап редактирования профиля
-
 function editPopup() {
-    nameInput.value = textProfile.textContent; // данные строки отвечают за установку исходных name/job в  форму input
+    nameInput.value = textProfile.textContent; 
     jobInput.value = subtextProfile.textContent;
-    addPopupCloseEvents();
+    hideInputErrors(formElement, validationConfig);
     openPopup(popup);
 };
 
 // Открытие поп-ап нового места
-
 function editPopupNewPlace() {
     placeInput.value = null;
     linkInput.value = null;
-    addPopupCloseEvents();
-
+    hideInputErrors(formElement, validationConfig);
+    setButtonInactive(submitButton, validationConfig);
     openPopup(popupNewPlace);
 };
 
 // Обработчик «отправки» формы, хотя пока
 // она никуда отправляться не будет
 function formSubmitHandler (evt) {
-    evt.preventDefault(); // Эта строчка отменяет стандартную отправку формы.
-                                                // Так мы можем определить свою логику отправки.
-                                                // О том, как это делать, расскажем позже.
-
-    // Находим поля формы в DOM
-
-    // Получите значение полей из свойства value
-
-    // Выберите элементы, куда должны быть вставлены значения полей
-
-    // Вставьте новые значения с помощью textContent
-
+    evt.preventDefault();
     textProfile.textContent = nameInput.value; 
     subtextProfile.textContent = jobInput.value;
     closePopup(popup);
@@ -184,16 +157,16 @@ function formAddHandler (evt) {
 
 // Добавление  слушателей Esc и оверлей
 function addPopupCloseEvents () {
-    document.addEventListener('mousedown', closePopupAtEvent);
-    document.addEventListener('keydown', closePopupAtEvent);
+    document.addEventListener('mousedown', closePopupAtOverlay);
+    document.addEventListener('keydown', closePopupAtEsc);
 };
 
 // Cнятие слушателей Esc и оверлей
-
 function removePopupCloseEvents () {
-    document.removeEventListener('mousedown', closePopupAtEvent);
-    document.removeEventListener('keydown', closePopupAtEvent);
+    document.removeEventListener('mousedown', closePopupAtOverlay);
+    document.removeEventListener('keydown', closePopupAtEsc);
 };
+
 
 // Cлушатели сабмитов
 formElement.addEventListener('submit', formSubmitHandler);
