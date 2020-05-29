@@ -82,6 +82,7 @@ function handleLikeButtonClick(event) {
 function handleRemoveButtonClick(event) {
     const deleteElement = event.target.closest('.element');
     // Не хватает мозгов исправить ситуацию со снятием слушателей с анонимными функциями :( 
+    // Я исправлю это к следующему зачету обещаю. Хотелось бы чтобы проверяли Вы :))    
     deleteElement.remove();
 };   
 
@@ -89,7 +90,6 @@ function handleRemoveButtonClick(event) {
 function handleImageElementClick(imageElement) {
     popupImage.src = imageElement.src;
     popupCaption.textContent = imageElement.alt;
-    addPopupCloseEvents();
     openPopup(popupZoom);
 };
 
