@@ -81,8 +81,6 @@ function handleLikeButtonClick(event) {
 // Удаление карточек(элементов)
 function handleRemoveButtonClick(event) {
     const deleteElement = event.target.closest('.element');
-    // Не хватает мозгов исправить ситуацию со снятием слушателей с анонимными функциями :( 
-    // Я исправлю это к следующему зачету обещаю. Хотелось бы чтобы проверяли Вы :))    
     deleteElement.remove();
 };   
 
@@ -92,6 +90,8 @@ function handleImageElementClick(imageElement) {
     popupCaption.textContent = imageElement.alt;
     openPopup(popupZoom);
 };
+
+
 
 // Создание карточки (элемента)
 function createCard(item) {
