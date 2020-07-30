@@ -1,4 +1,5 @@
 import { Card } from "./Card.js";
+import { FormValidator } from "./FormValidator.js";
 const elements = document.querySelector(".elements");
 const submitButton = document.querySelector(".popup__submit-button");
 const editButton = document.querySelector(".profile__edit-button");
@@ -19,8 +20,15 @@ const popupZoom = document.querySelector(".popup_zoom");
 const popupNewPlace = document.querySelector(".popup_new-place");
 const formElement = document.querySelector(".popup__form");
 const formElementNewPlace = document.querySelector(".popup__form_new-place");
-
-// Render cards
+const validationConfig = {
+  formSelector: ".popup__form",
+  inputSelector: ".popup__input",
+  submitButtonSelector: ".popup__submit-button",
+  inactiveButtonClass: "popup__submit-button_inactive",
+  inputErrorClass: "popup__input_type_error",
+  inputErrorSelector: ".popup__input_type_error",
+  errorClass: "popup__input-error_active",
+};
 const cards = [
   {
     name: "Париж",
@@ -52,16 +60,30 @@ const cards = [
       "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg",
   },
 ];
-const renderCards = (cards) => {
-  cards.forEach((item) => {
-    const card = new Card(item, ".element__template");
-    const cardElement = card.generateCard();
 
-    document.querySelector(".elements").prepend(cardElement);
-  });
-};
+// Рендер карточек
+
+function renderCard(item) {
+  const card = new Card(item, ".element__template");
+  const cardElement = card.generateCard();
+
+  elements.prepend(cardElement);
+}
+
+function renderCards(cards) {
+  cards.forEach(renderCard);
+}
 
 renderCards(cards);
+
+// Cоздание экземпляров для валидации форм
+
+const validatorPopupProfile = new FormValidator(validationConfig, formElement);
+
+const validatorNewPlace = new FormValidator(
+  validationConfig,
+  formElementNewPlace
+);
 
 // Открытие поп-ап
 function openPopup(popupName) {
@@ -90,18 +112,24 @@ function closePopupAtOverlay(evt) {
 
 // поп-ап редактирования профиля
 function editPopup() {
+  // @ts-ignore
   nameInput.value = textProfile.textContent;
+  // @ts-ignore
   jobInput.value = subtextProfile.textContent;
-  hideInputErrors(formElement, validationConfig);
+  // Валидация посредством вызова публичного метода для данного экземпляра класса
+  validatorPopupProfile.enableValidation();
   openPopup(popup);
 }
 
 // Открытие поп-ап нового места
 function editPopupNewPlace() {
+  // @ts-ignore
   placeInput.value = null;
+  // @ts-ignore
   linkInput.value = null;
-  hideInputErrors(formElement, validationConfig);
-  setButtonInactive(submitButton, validationConfig);
+
+  // Валидация посредством вызова публичного метода для данного экземпляра класса
+  validatorNewPlace.enableValidation();
   openPopup(popupNewPlace);
 }
 
@@ -109,7 +137,9 @@ function editPopupNewPlace() {
 // она никуда отправляться не будет
 function formSubmitHandler(evt) {
   evt.preventDefault();
+  // @ts-ignore
   textProfile.textContent = nameInput.value;
+  // @ts-ignore
   subtextProfile.textContent = jobInput.value;
   closePopup(popup);
 }
@@ -117,23 +147,19 @@ function formSubmitHandler(evt) {
 // Обработчик добавления новых карточек.
 function formAddHandler(evt) {
   evt.preventDefault();
-  const card = new Card(
-    { name: placeInput.value, link: linkInput.value },
-    ".element__template"
-  );
-  const cardElement = card.generateCard();
-  elements.prepend(cardElement);
+  // @ts-ignore
+  renderCard({ name: placeInput.value, link: linkInput.value });
   closePopup(popupNewPlace);
 }
 
 // Добавление  слушателей Esc и оверлей
-export function addPopupCloseEvents() {
+function addPopupCloseEvents() {
   document.addEventListener("mousedown", closePopupAtOverlay);
   document.addEventListener("keydown", closePopupAtEsc);
 }
 
 // Cнятие слушателей Esc и оверлей
-export function removePopupCloseEvents() {
+function removePopupCloseEvents() {
   document.removeEventListener("mousedown", closePopupAtOverlay);
   document.removeEventListener("keydown", closePopupAtEsc);
 }
@@ -154,3 +180,5 @@ closeButtonNewPlace.addEventListener("click", () => {
 closeButtonZoom.addEventListener("click", () => {
   closePopup(popupZoom);
 });
+
+export { addPopupCloseEvents, removePopupCloseEvents };

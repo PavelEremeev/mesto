@@ -1,4 +1,4 @@
-import { addPopupCloseEvents, removePopupCloseEvents } from "./script.js";
+import { addPopupCloseEvents, removePopupCloseEvents } from "./index.js";
 class Card {
   constructor(item, templateSelector) {
     this._title = item.name;
@@ -41,6 +41,7 @@ class Card {
   }
 
   _handleLikeButtonClick() {
+    // @ts-ignore
     event.target.classList.toggle("element__like-button_active");
   }
 
