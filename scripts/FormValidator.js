@@ -64,10 +64,11 @@ class FormValidator {
     }
   }
 
-  //_setButtonInactive(buttonElement) {
-  //  buttonElement.classList.add(this._inactiveButtonClass);
-  //  buttonElement.disabled = true;
-  //}
+  // Обнуление состояния кнопки submit
+  _setButtonInactive(buttonElement) {
+    buttonElement.classList.add(this._inactiveButtonClass);
+    buttonElement.disabled = true;
+  }
 
   // Слушатели для формы
   _setEventListeners() {
@@ -86,7 +87,7 @@ class FormValidator {
         this._toggleButtonState(inputList, buttonElement);
       });
     });
-    //this._setButtonInactive(buttonElement);
+    this._setButtonInactive(buttonElement);
   }
 
   // Включение валидации всего
