@@ -54,7 +54,11 @@ class FormValidator {
   }
 
   //  Изменение состояниея кнопки в зависимости от валидности
-  _toggleButtonState(inputList, buttonElement) {
+  toggleButtonState() {
+    const buttonElement = this._form.querySelector(this._submitButtonSelector);
+    const inputList = Array.from(
+      this._form.querySelectorAll(this._inputSelector)
+    );
     if (this._hasInvalidInput(inputList)) {
       buttonElement.classList.add(this._inactiveButtonClass);
       buttonElement.disabled = true;
@@ -64,27 +68,18 @@ class FormValidator {
     }
   }
 
-  // Обнуление состояния кнопки submit
-  setButtonInactive() {
-    const buttonElement = this._form.querySelector(this._submitButtonSelector);
-    buttonElement.classList.add(this._inactiveButtonClass);
-    buttonElement.disabled = true;
-  }
-
   // Слушатели для формы
   _setEventListeners() {
     const inputList = Array.from(
       this._form.querySelectorAll(this._inputSelector)
     );
-    const buttonElement = this._form.querySelector(this._submitButtonSelector);
     // проверка состояния кнопки в самом начале
-
-    this._toggleButtonState(inputList, buttonElement);
+    this.toggleButtonState();
 
     inputList.forEach((inputElement) => {
       inputElement.addEventListener("input", () => {
         this._checkInputValidity(inputElement);
-        this._toggleButtonState(inputList, buttonElement);
+        this.toggleButtonState();
       });
     });
   }

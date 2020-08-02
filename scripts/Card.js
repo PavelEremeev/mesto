@@ -59,7 +59,7 @@ class Card {
     addPopupCloseEvents();
     popupImage.src = this._image;
     popupCaption.textContent = this._title;
-    this._image.alt = popupCaption.textContent;
+    popupImage.alt = popupCaption.textContent;
   }
 }
 

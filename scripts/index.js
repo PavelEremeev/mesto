@@ -1,7 +1,7 @@
 import { Card } from "./Card.js";
 import { FormValidator } from "./FormValidator.js";
 const elements = document.querySelector(".elements");
-const submitButton = document.querySelector(".popup__submit-button");
+//const submitButton = document.querySelector(".popup__submit-button");
 const editButton = document.querySelector(".profile__edit-button");
 const closeButton = document.querySelector(".popup__close-button");
 const closeButtonNewPlace = document.querySelector(
@@ -120,7 +120,6 @@ function editPopup() {
   // @ts-ignore
   jobInput.value = subtextProfile.textContent;
 
-  validatorPopupProfile.setButtonInactive();
   openPopup(popup);
 }
 
@@ -131,7 +130,7 @@ function editPopupNewPlace() {
   // @ts-ignore
   linkInput.value = null;
 
-  validatorNewPlace.setButtonInactive();
+  validatorNewPlace.toggleButtonState();
   openPopup(popupNewPlace);
 }
 
