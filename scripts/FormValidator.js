@@ -65,7 +65,8 @@ class FormValidator {
   }
 
   // Обнуление состояния кнопки submit
-  _setButtonInactive(buttonElement) {
+  setButtonInactive() {
+    const buttonElement = this._form.querySelector(this._submitButtonSelector);
     buttonElement.classList.add(this._inactiveButtonClass);
     buttonElement.disabled = true;
   }
@@ -76,7 +77,6 @@ class FormValidator {
       this._form.querySelectorAll(this._inputSelector)
     );
     const buttonElement = this._form.querySelector(this._submitButtonSelector);
-
     // проверка состояния кнопки в самом начале
 
     this._toggleButtonState(inputList, buttonElement);
@@ -87,7 +87,6 @@ class FormValidator {
         this._toggleButtonState(inputList, buttonElement);
       });
     });
-    this._setButtonInactive(buttonElement);
   }
 
   // Включение валидации всего

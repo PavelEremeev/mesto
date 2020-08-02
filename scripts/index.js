@@ -119,6 +119,8 @@ function editPopup() {
   nameInput.value = textProfile.textContent;
   // @ts-ignore
   jobInput.value = subtextProfile.textContent;
+
+  validatorPopupProfile.setButtonInactive();
   openPopup(popup);
 }
 
@@ -128,6 +130,8 @@ function editPopupNewPlace() {
   placeInput.value = null;
   // @ts-ignore
   linkInput.value = null;
+
+  validatorNewPlace.setButtonInactive();
   openPopup(popupNewPlace);
 }
 
