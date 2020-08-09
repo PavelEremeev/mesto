@@ -34,14 +34,14 @@ import { FormValidator } from "./FormValidator.js";
 const cardList = new Section(
   {
     data: cards,
-    renderer: () => {
+    renderer: (item) => {
       const card = new Card(item, ".element__template");
       const cardElement = card.generateCard();
 
-      this.setItem(cardElement);
+      cardList.addItem(cardElement);
     },
   },
-  cardListSelector
+  "elements"
 );
 
 function renderCard(item) {

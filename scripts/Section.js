@@ -1,22 +1,20 @@
 export default class Section {
+    // items - массив данных (карточек)
+    // renderer - функция которая создает и отрисовывает данные (карточки)
+    // containerSelector -  селектор в который нужно добавить сами элементы
   constructor({ data, renderer }, containerSelector) {
     this._renderedItems = data;
     this._renderer = renderer;
     this._container = document.querySelector(containerSelector);
   }
-
-  setItem(element) {
-    this._container.append(element);
+// Расставляет данные в заданном порядке
+  addItem(element) {
+    this._container.prepend(element);
   }
 
-  clear() {
-    this._container.innerHTML = null;
-  }
-
+//  Включает метод который ответственен за отрисовку элементов
   renderItems() {
-    this.clear();
-    this._renderedItems.forEach((item) => {
-      this._renderer(item);
-    });
+    this._renderedItems.forEach(item => {this._renderer(item));
+    };
   }
 }
