@@ -1,3 +1,4 @@
+export const containerSelector = { elements: "elements" };
 export const elements = document.querySelector(".elements");
 //export const submitButton = document.querySelector(".popup__submit-button");
 export const editButton = document.querySelector(".profile__edit-button");
@@ -17,9 +18,14 @@ export const placeInput = document.querySelector(
   ".popup__input_new-place_name"
 );
 export const linkInput = document.querySelector(".popup__input_new-place_link");
-export const popup = document.querySelector(".popup");
-export const popupZoom = document.querySelector(".popup_zoom");
-export const popupNewPlace = document.querySelector(".popup_new-place");
+export const popupSelector = {
+  popupProfile: "popup",
+  popupZoom: "popup_zoom",
+  popupNewPlace: "popup_new-place",
+};
+//export const popup = document.querySelector(".popup");
+//export const popupZoom = document.querySelector(".popup_zoom");
+//export const popupNewPlace = document.querySelector(".popup_new-place");
 export const formElement = document.querySelector(".popup__form");
 export const formElementNewPlace = document.querySelector(
   ".popup__form_new-place"

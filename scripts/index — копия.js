@@ -1,6 +1,5 @@
 import {
-  containerSelector,
-  //elements,
+  elements,
   editButton,
   closeButton,
   closeButtonNewPlace,
@@ -12,9 +11,9 @@ import {
   jobInput,
   placeInput,
   linkInput,
-  //popup,
-  //popupZoom,
-  //popupNewPlace,
+  popup,
+  popupZoom,
+  popupNewPlace,
   formElement,
   formElementNewPlace,
   validationConfig,
@@ -44,7 +43,7 @@ const cardList = new Section(
       cardList.addItem(cardElement);
     },
   },
-  containerSelector.elements
+  elements
 );
 
 const popupProfile = new Popup(popupSelector.popupProfile);
@@ -75,23 +74,25 @@ validatorPopupProfile.enableValidation();
 validatorNewPlace.enableValidation();
 
 // Редактирование поп-ап профиля
-//function editPopup() {
-// @ts-ignore
-//  nameInput.value = textProfile.textContent;
-// @ts-ignore
-//  jobInput.value = subtextProfile.textContent;
-//  openPopup(popup);
-//}
+function editPopup() {
+  // @ts-ignore
+  nameInput.value = textProfile.textContent;
+  // @ts-ignore
+  jobInput.value = subtextProfile.textContent;
+
+  openPopup(popup);
+}
 
 // Редактирование поп-ап нового места
-//function editPopupNewPlace() {
-// @ts-ignore
-//placeInput.value = null;
-// @ts-ignore
-//linkInput.value = null;
-//  validatorNewPlace.toggleButtonState();
-//  openPopup(popupNewPlace);
-//}
+function editPopupNewPlace() {
+  // @ts-ignore
+  placeInput.value = null;
+  // @ts-ignore
+  linkInput.value = null;
+
+  validatorNewPlace.toggleButtonState();
+  openPopup(popupNewPlace);
+}
 
 // Обработчик «отправки» формы, хотя пока
 // она никуда отправляться не будет
@@ -117,14 +118,14 @@ formElement.addEventListener("submit", formSubmitHandler);
 formElementNewPlace.addEventListener("submit", formAddHandler);
 
 // Слушатели
-//editButton.addEventListener("click", editPopup);
-//closeButton.addEventListener("click", () => {
-//  closePopup(popup);
-//});
-//addButton.addEventListener("click", editPopupNewPlace);
-//closeButtonNewPlace.addEventListener("click", () => {
-//  closePopup(popupNewPlace);
-//});
-//closeButtonZoom.addEventListener("click", () => {
-//  closePopup(popupZoom);
-//});
+editButton.addEventListener("click", editPopup);
+closeButton.addEventListener("click", () => {
+  closePopup(popup);
+});
+addButton.addEventListener("click", editPopupNewPlace);
+closeButtonNewPlace.addEventListener("click", () => {
+  closePopup(popupNewPlace);
+});
+closeButtonZoom.addEventListener("click", () => {
+  closePopup(popupZoom);
+});
