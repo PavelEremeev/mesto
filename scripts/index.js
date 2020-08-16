@@ -1,5 +1,6 @@
 import {
   containerSelector,
+  templateSelector,
   //elements,
   editButton,
   closeButton,
@@ -12,33 +13,38 @@ import {
   jobInput,
   placeInput,
   linkInput,
-  //popup,
-  //popupZoom,
-  //popupNewPlace,
+  // popup,
+  // popupZoom,
+  // popupNewPlace,
   formElement,
   formElementNewPlace,
   validationConfig,
   cards,
   popupSelector,
 } from "./constants.js";
-import {
-  openPopup,
-  closePopup,
-  addPopupCloseEvents,
-  removePopupCloseEvents,
-} from "./utils.js";
+// import {
+//   openPopup,
+//   closePopup,
+//   addPopupCloseEvents,
+//   removePopupCloseEvents,
+// } from "./utils.js";
 import Popup from "./Popup.js";
 import Card from "./Card.js";
 import Section from "./Section.js";
-import { FormValidator } from "./FormValidator.js";
+import FormValidator from "./FormValidator.js";
+import PopupWithImage from "./PopupWithImage.js";
+import PopupWithForm from "./PopupWithForm.js";
 
-// Рендер карточек
-
+// Cоздания экземпляра для рендеринга изначальнного массива карточек
 const cardList = new Section(
   {
     data: cards,
     renderer: (item) => {
-      const card = new Card(item, ".element__template");
+      const card = new Card(item, templateSelector.elementTemplate, {
+        handleCardClick: () => {
+          popupZoom.open(item);
+        },
+      });
       const cardElement = card.generateCard();
 
       cardList.addItem(cardElement);
@@ -47,23 +53,31 @@ const cardList = new Section(
   containerSelector.elements
 );
 
+// Рендеринг карточек
+cardList.renderItems();
+
+// Создания экземепляра попап-профиля
 const popupProfile = new Popup(popupSelector.popupProfile);
 
-//function renderCard(item) {
-//  const card = new Card(item, ".element__template");
-//  const cardElement = card.generateCard();
-//
-//  elements.prepend(cardElement);
-//}
+// Создания экземпляра формы для добавления карточки
+const addCard = new PopupWithForm(popupSelector.popupNewPlace, (formData) => {
+  console.log(formData);
+  const card = new Card(formData, templateSelector.elementTemplate);
+});
 
-//function renderCards(cards) {
-//  cards.forEach(renderCard);
-//}
+// Cоздания экземпляра попап-изображения
+const popupZoom = new PopupWithImage(popupSelector.popupZoom);
 
-//renderCards(cards);
+// Наложение слушателей событий к попапам
+popupProfile.setEventListeners();
+popupZoom.setEventListeners();
+
+// Если нужно вот так накидывать слушатели на кнопки то ООП редкостное дно.
+editButton.addEventListener("click", () => {
+  popupProfile.open();
+});
 
 // Cоздание экземпляров для валидации форм
-
 const validatorPopupProfile = new FormValidator(validationConfig, formElement);
 
 const validatorNewPlace = new FormValidator(
@@ -74,57 +88,38 @@ const validatorNewPlace = new FormValidator(
 validatorPopupProfile.enableValidation();
 validatorNewPlace.enableValidation();
 
-// Редактирование поп-ап профиля
-//function editPopup() {
-// @ts-ignore
-//  nameInput.value = textProfile.textContent;
-// @ts-ignore
-//  jobInput.value = subtextProfile.textContent;
-//  openPopup(popup);
-//}
-
-// Редактирование поп-ап нового места
-//function editPopupNewPlace() {
-// @ts-ignore
-//placeInput.value = null;
-// @ts-ignore
-//linkInput.value = null;
-//  validatorNewPlace.toggleButtonState();
-//  openPopup(popupNewPlace);
-//}
-
 // Обработчик «отправки» формы, хотя пока
 // она никуда отправляться не будет
-function formSubmitHandler(evt) {
-  evt.preventDefault();
-  // @ts-ignore
-  textProfile.textContent = nameInput.value;
-  // @ts-ignore
-  subtextProfile.textContent = jobInput.value;
-  closePopup(popup);
-}
+// function formSubmitHandler(evt) {
+//   evt.preventDefault();
+//   // @ts-ignore
+//   textProfile.textContent = nameInput.value;
+//   // @ts-ignore
+//   subtextProfile.textContent = jobInput.value;
+//   closePopup(popup);
+// }
 
-// Обработчик добавления новых карточек.
-function formAddHandler(evt) {
-  evt.preventDefault();
-  // @ts-ignore
-  renderCard({ name: placeInput.value, link: linkInput.value });
-  closePopup(popupNewPlace);
-}
+// // Обработчик добавления новых карточек.
+// function formAddHandler(evt) {
+//   evt.preventDefault();
+//   // @ts-ignore
+//   renderCard({ name: placeInput.value, link: linkInput.value });
+//   closePopup(popupNewPlace);
+// }
 
 // Cлушатели сабмитов
-formElement.addEventListener("submit", formSubmitHandler);
-formElementNewPlace.addEventListener("submit", formAddHandler);
+// formElement.addEventListener("submit", formSubmitHandler);
+// formElementNewPlace.addEventListener("submit", formAddHandler);
 
 // Слушатели
-//editButton.addEventListener("click", editPopup);
-//closeButton.addEventListener("click", () => {
+// editButton.addEventListener("click", editPopup);
+// closeButton.addEventListener("click", () => {
 //  closePopup(popup);
-//});
-//addButton.addEventListener("click", editPopupNewPlace);
-//closeButtonNewPlace.addEventListener("click", () => {
+// });
+// addButton.addEventListener("click", editPopupNewPlace);
+// closeButtonNewPlace.addEventListener("click", () => {
 //  closePopup(popupNewPlace);
-//});
-//closeButtonZoom.addEventListener("click", () => {
+// });
+// closeButtonZoom.addEventListener("click", () => {
 //  closePopup(popupZoom);
-//});
+// });

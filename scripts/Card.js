@@ -1,9 +1,12 @@
-import { addPopupCloseEvents, removePopupCloseEvents } from "./utils.js";
+// import { addPopupCloseEvents, removePopupCloseEvents } from "./utils.js";
+// import PopupWithImage from "./PopupWithImage.js";
 export default class Card {
-  constructor(item, templateSelector) {
+  constructor(item, templateSelector, { handleCardClick }) {
+    this._item = item;
     this._title = item.name;
     this._image = item.link;
     this._templateSelector = templateSelector;
+    this._handleCardClick = handleCardClick;
   }
 
   _getTemplate() {
@@ -41,27 +44,18 @@ export default class Card {
   }
 
   _handleLikeButtonClick() {
-    // @ts-ignorem
+    // @ts-ignore
     event.target.classList.toggle("element__like-button_active");
   }
 
   _handleRemoveButtonClick() {
-    // @ts-ignorem
+    // @ts-ignore
     const deleteElement = event.target.closest(".element");
-    removePopupCloseEvents();
+    // removePopupCloseEvents();
     deleteElement.remove();
   }
 
   _handleImageElementClick(cardElemImg) {
-    const popupZoom = document.querySelector(".popup_zoom");
-    const popupImage = document.querySelector(".popup__image");
-    const popupCaption = document.querySelector(".popup__caption");
-    popupZoom.classList.add("popup_opened");
-    addPopupCloseEvents();
-    // @ts-ignorem
-    popupImage.src = this._image;
-    popupCaption.textContent = this._title;
-    // @ts-ignorem
-    popupImage.alt = popupCaption.textContent;
+    this._handleCardClick(this._item);
   }
 }
