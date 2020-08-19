@@ -1,5 +1,3 @@
-// import { addPopupCloseEvents, removePopupCloseEvents } from "./utils.js";
-// import PopupWithImage from "./PopupWithImage.js";
 export default class Card {
   constructor(item, templateSelector, { handleCardClick }) {
     this._item = item;

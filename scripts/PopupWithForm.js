@@ -6,16 +6,8 @@ export default class PopupWithForm extends Popup {
     this._submitForm = submitForm;
   }
 
-  open(data) {
-    if (data) {
-      this._fillForm(data);
-    }
-
+  open() {
     super.open();
-  }
-
-  _fillForm(data) {
-    //
   }
 
   _getInputValues() {
@@ -28,13 +20,6 @@ export default class PopupWithForm extends Popup {
     });
     return this._formValues;
   }
-
-  /**
-   * {
-   *  name: Card1
-   *  link: https://...
-   * }
-   */
 
   setEventListeners() {
     super.setEventListeners();

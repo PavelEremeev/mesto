@@ -24,6 +24,8 @@ export const popupSelector = {
   popupZoom: ".popup_zoom",
   popupNewPlace: ".popup_new-place",
 };
+
+export const submitButton = document.querySelector(".popup__submit-button");
 //export const popup = document.querySelector(".popup");
 //export const popupZoom = document.querySelector(".popup_zoom");
 //export const popupNewPlace = document.querySelector(".popup_new-place");

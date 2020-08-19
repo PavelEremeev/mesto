@@ -3,6 +3,7 @@ import {
   templateSelector,
   //elements,
   editButton,
+  submitButton,
   closeButton,
   closeButtonNewPlace,
   closeButtonZoom,
@@ -56,25 +57,48 @@ const cardList = new Section(
 // Рендеринг карточек
 cardList.renderItems();
 
+function createCardElement(data) {
+  const card = new Card(data, templateSelector.elementTemplate, {
+    handleCardClick: () => {
+      popupZoom.open(data);
+    },
+  });
+  const cardElement = card.generateCard();
+  cardList.addItem(cardElement);
+}
+
 // Создания экземепляра попап-профиля
 const popupProfile = new Popup(popupSelector.popupProfile);
 
+// Cоздания экземпляра попап-нового места
+const popupNewPlace = new Popup(popupSelector.popupNewPlace);
+
 // Создания экземпляра формы для добавления карточки
-const addCard = new PopupWithForm(popupSelector.popupNewPlace, (formData) => {
-  console.log(formData);
-  const card = new Card(formData, templateSelector.elementTemplate);
-});
+const addCardPopup = new PopupWithForm(
+  popupSelector.popupNewPlace,
+  (formData) => {
+    createCardElement(formData);
+    popupZoom.close();
+  }
+);
 
 // Cоздания экземпляра попап-изображения
 const popupZoom = new PopupWithImage(popupSelector.popupZoom);
 
-// Наложение слушателей событий к попапам
+// Наложение слушателей событий
 popupProfile.setEventListeners();
+popupNewPlace.setEventListeners();
 popupZoom.setEventListeners();
-
-// Если нужно вот так накидывать слушатели на кнопки то ООП редкостное дно.
 editButton.addEventListener("click", () => {
   popupProfile.open();
+});
+addButton.addEventListener("click", () => {
+  validatorNewPlace.toggleButtonState();
+  addCardPopup.open();
+});
+
+submitButton.addEventListener("click", () => {
+  addCardPopup.setEventListeners();
 });
 
 // Cоздание экземпляров для валидации форм
