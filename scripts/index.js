@@ -35,6 +35,15 @@ import Section from "./Section.js";
 import FormValidator from "./FormValidator.js";
 import PopupWithImage from "./PopupWithImage.js";
 import PopupWithForm from "./PopupWithForm.js";
+import UserInfo from "./UserInfo.js";
+
+// Создания экземпляра класса с инфо. попап-профиля
+const userInfoProfile = new UserInfo({
+  nameSelector: textProfile,
+  descriptionSelector: subtextProfile
+});
+
+
 
 // Cоздания экземпляра для рендеринга изначальнного массива карточек
 const cardList = new Section(
@@ -74,13 +83,22 @@ const popupProfile = new Popup(popupSelector.popupProfile);
 const popupNewPlace = new Popup(popupSelector.popupNewPlace);
 
 // Создания экземпляра формы для добавления карточки
-const addCardPopup = new PopupWithForm(
+const popupNewPlaceForm = new PopupWithForm(
   popupSelector.popupNewPlace,
   (formData) => {
     createCardElement(formData);
-    popupZoom.close();
+    popupNewPlaceForm.close();
   }
 );
+
+// Создания экземпляра формы для профиля
+
+const popupProfileForm = new PopupWithForm(
+  popupSelector.popupProfile, (formData) => {
+    userInfoProfile.setUserInfo(formData);
+    popupProfileForm.close();
+  }
+)
 
 // Cоздания экземпляра попап-изображения
 const popupZoom = new PopupWithImage(popupSelector.popupZoom);
@@ -90,16 +108,21 @@ popupProfile.setEventListeners();
 popupNewPlace.setEventListeners();
 popupZoom.setEventListeners();
 editButton.addEventListener("click", () => {
+
   popupProfile.open();
 });
 addButton.addEventListener("click", () => {
   validatorNewPlace.toggleButtonState();
-  addCardPopup.open();
+  popupNewPlaceForm.open();
 });
 
+// хз что тут можно сделать
 submitButton.addEventListener("click", () => {
-  addCardPopup.setEventListeners();
+  popupNewPlaceForm.setEventListeners();
 });
+
+
+
 
 // Cоздание экземпляров для валидации форм
 const validatorPopupProfile = new FormValidator(validationConfig, formElement);
