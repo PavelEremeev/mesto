@@ -39,9 +39,16 @@ import UserInfo from "./UserInfo.js";
 
 // Создания экземпляра класса с инфо. попап-профиля
 const userInfoProfile = new UserInfo({
-  nameSelector: textProfile,
-  descriptionSelector: subtextProfile
+  nameInput,
+  jobInput
 });
+
+// Получение значений попап-профиля
+function getUserInputs() {
+  const userInputs = userInfoProfile.getUserInfo();
+  textProfile.value = userInputs.name;
+  subtextProfile.value = userInputs.description;
+}
 
 
 
@@ -108,7 +115,7 @@ popupProfile.setEventListeners();
 popupNewPlace.setEventListeners();
 popupZoom.setEventListeners();
 editButton.addEventListener("click", () => {
-
+  getUserInputs();
   popupProfile.open();
 });
 addButton.addEventListener("click", () => {
