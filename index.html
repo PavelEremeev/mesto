@@ -21,8 +21,8 @@
           />
           <div class="profile__author-card">
             <div class="profile__text-container">
-              <h1 class="profile__text">Павел Е.</h1>
-              <p class="profile__subtext">Самоизолятор</p>
+              <h1 class="profile__text">Павел</h1>
+              <p class="profile__subtext">усталотпроектаместо</p>
             </div>
             <button type="button" class="profile__edit-button"></button>
           </div>
@@ -43,7 +43,9 @@
       </section>
     </main>
     <footer class="footer">
-      <p class="footer__copyright">&copy;2020. Mesto Russia by Pavel Eremeev</p>
+      <p class="footer__copyright">
+        &copy;2020. Mesto Russia
+      </p>
     </footer>
     <div class="popup">
       <form class="popup__form" novalidate>
@@ -54,6 +56,7 @@
           pattern="[a-zA-ZА-ЯЁа-яё\s\-]+[^\s\-]+"
           id="name-input"
           type="text"
+          name="name"
           placeholder="Имя"
           required
           minlength="2"
@@ -64,6 +67,7 @@
           class="popup__input popup__input_job"
           id="job-input"
           type="text"
+          name="description"
           pattern="[a-zA-ZА-ЯЁа-яё\s\-]+[^\s\-]+"
           placeholder="Профессия"
           required
@@ -84,6 +88,7 @@
         <input
           class="popup__input popup__input_new-place_name"
           id="newplace-name-input"
+          name="name"
           type="text"
           placeholder="Название"
           required
@@ -94,6 +99,7 @@
         <input
           class="popup__input popup__input_new-place_link"
           id="newplace-link-input"
+          name="link"
           type="url"
           placeholder="Ссылка на картинку"
           required

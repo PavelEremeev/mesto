@@ -1,4 +1,4 @@
-class FormValidator {
+export default class FormValidator {
   constructor(config, form) {
     this._inputSelector = config.inputSelector;
     this._submitButtonSelector = config.submitButtonSelector;
@@ -27,7 +27,7 @@ class FormValidator {
   }
 
   // Удаляем ошибки input при повторном открытии
-  _hideInputErrors() {
+  hideInputErrors() {
     const allErroredInputs = this._form.querySelectorAll(
       this._inputErrorSelector
     );
@@ -87,8 +87,5 @@ class FormValidator {
   // Включение валидации всего
   enableValidation() {
     this._setEventListeners();
-    this._hideInputErrors();
   }
 }
-
-export { FormValidator };

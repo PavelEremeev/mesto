@@ -1,9 +1,10 @@
-import { addPopupCloseEvents, removePopupCloseEvents } from "./index.js";
-class Card {
-  constructor(item, templateSelector) {
+export default class Card {
+  constructor(item, templateSelector, { handleCardClick }) {
+    this._item = item;
     this._title = item.name;
     this._image = item.link;
     this._templateSelector = templateSelector;
+    this._handleCardClick = handleCardClick;
   }
 
   _getTemplate() {
@@ -46,21 +47,16 @@ class Card {
   }
 
   _handleRemoveButtonClick() {
+    // @ts-ignore
     const deleteElement = event.target.closest(".element");
-    removePopupCloseEvents();
+    // removePopupCloseEvents();
     deleteElement.remove();
+    deleteElement.innerHTML = " ";
   }
 
-  _handleImageElementClick() {
-    const popupZoom = document.querySelector(".popup_zoom");
-    const popupImage = document.querySelector(".popup__image");
+  _handleImageElementClick(cardElemImg) {
     const popupCaption = document.querySelector(".popup__caption");
-    popupZoom.classList.add("popup_opened");
-    addPopupCloseEvents();
-    popupImage.src = this._image;
     popupCaption.textContent = this._title;
-    popupImage.alt = popupCaption.textContent;
+    this._handleCardClick(this._item);
   }
 }
-
-export { Card };
