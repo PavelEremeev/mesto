@@ -27,7 +27,7 @@ export default class FormValidator {
   }
 
   // Удаляем ошибки input при повторном открытии
-  _hideInputErrors() {
+  hideInputErrors() {
     const allErroredInputs = this._form.querySelectorAll(
       this._inputErrorSelector
     );
@@ -87,6 +87,5 @@ export default class FormValidator {
   // Включение валидации всего
   enableValidation() {
     this._setEventListeners();
-    this._hideInputErrors();
   }
 }

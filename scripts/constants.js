@@ -4,31 +4,31 @@ export const templateSelector = { elementTemplate: ".element__template" };
 //export const submitButton = document.querySelector(".popup__submit-button");
 export const editButton = document.querySelector(".profile__edit-button");
 export const closeButton = document.querySelector(".popup__close-button");
-export const closeButtonNewPlace = document.querySelector(
-  ".popup__close-button_new-place"
-);
-export const closeButtonZoom = document.querySelector(
-  ".popup__close-button_zoom"
-);
+// export const closeButtonNewPlace = document.querySelector(
+//   ".popup__close-button_new-place"
+// );
+// export const closeButtonZoom = document.querySelector(
+//   ".popup__close-button_zoom"
+// );
 export const addButton = document.querySelector(".profile__add-button");
-export const textProfile = document.querySelector(".profile__text");
-export const subtextProfile = document.querySelector(".profile__subtext");
+// export const textProfile = document.querySelector(".profile__text");
+// export const subtextProfile = document.querySelector(".profile__subtext");
 export const nameInput = document.querySelector(".popup__input_name");
 export const jobInput = document.querySelector(".popup__input_job");
-export const placeInput = document.querySelector(
-  ".popup__input_new-place_name"
-);
-export const linkInput = document.querySelector(".popup__input_new-place_link");
+// export const placeInput = document.querySelector(
+//   ".popup__input_new-place_name"
+// );
+// export const linkInput = document.querySelector(".popup__input_new-place_link");
 export const popupSelector = {
   popupProfile: ".popup",
   popupZoom: ".popup_zoom",
   popupNewPlace: ".popup_new-place",
 };
 
-export const submitButton = document.querySelector(".popup__submit-button");
-//export const popup = document.querySelector(".popup");
-//export const popupZoom = document.querySelector(".popup_zoom");
-//export const popupNewPlace = document.querySelector(".popup_new-place");
+// export const submitButton = document.querySelector(".popup__submit-button");
+// export const popup = document.querySelector(".popup");
+// export const popupZoom = document.querySelector(".popup_zoom");
+// export const popupNewPlace = document.querySelector(".popup_new-place");
 export const formElement = document.querySelector(".popup__form");
 export const formElementNewPlace = document.querySelector(
   ".popup__form_new-place"
