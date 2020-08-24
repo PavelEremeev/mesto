@@ -10,12 +10,14 @@
 @media screen and (max-width: 805px) {
     .element__image {
     height: 250px;
+    }
 }
 
 
-
+/* 
 @media screen and (max-width: 805px) {
     .element__image {
         height: 282px;
     }
-}
+} 
+*/

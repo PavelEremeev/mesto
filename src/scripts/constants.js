@@ -1,6 +1,12 @@
+import paris from "../images/paris.jpg";
+import sydney from "../images/sydney.jpg";
+import tula from "../images/tula.jpg";
+import moscow from "../images/moscow.jpg";
+import bali from "../images/bali.jpg";
+import baikal from "../images/baikal.jpg";
+
 export const containerSelector = { elements: ".elements" };
 export const templateSelector = { elementTemplate: ".element__template" };
-//export const elements = document.querySelector(".elements");
 //export const submitButton = document.querySelector(".popup__submit-button");
 export const editButton = document.querySelector(".profile__edit-button");
 export const closeButton = document.querySelector(".popup__close-button");
@@ -45,31 +51,26 @@ export const validationConfig = {
 export const cards = [
   {
     name: "Париж",
-    link:
-      "https://images.unsplash.com/photo-1562815243-3e7c83b4b4a8?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80",
+    link: paris,
   },
   {
     name: "Сидней",
-    link:
-      "https://images.unsplash.com/photo-1525755596908-8f1446d13044?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=701&q=80",
+    link: sydney,
   },
   {
     name: "Тула",
-    link: "https://versiya.info/uploads/posts/2017-12/1512743766_40.jpg",
+    link: tula,
   },
   {
     name: "Москва",
-    link:
-      "https://images.unsplash.com/photo-1512495039889-52a3b799c9bc?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=634&q=80",
+    link: moscow,
   },
   {
     name: "Бали",
-    link:
-      "https://images.unsplash.com/photo-1537953773345-d172ccf13cf1?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=675&q=80",
+    link: bali,
   },
   {
     name: "Байкал",
-    link:
-      "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg",
+    link: baikal,
   },
 ];
