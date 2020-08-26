@@ -23,14 +23,14 @@ import {
   validationConfig,
   cards,
   popupSelector,
-} from "./constants.js";
-import Popup from "./Popup.js";
-import Card from "./Card.js";
-import Section from "./Section.js";
-import FormValidator from "./FormValidator.js";
-import PopupWithImage from "./PopupWithImage.js";
-import PopupWithForm from "./PopupWithForm.js";
-import UserInfo from "./UserInfo.js";
+} from "../components/constants.js";
+import Popup from "../components/Popup.js";
+import Card from "../components/Card.js";
+import Section from "../components/Section.js";
+import FormValidator from "../components/FormValidator.js";
+import PopupWithImage from "../components/PopupWithImage.js";
+import PopupWithForm from "../components/PopupWithForm.js";
+import UserInfo from "../components/UserInfo.js";
 
 // Создания экземпляра класса с инфо. попап-профиля
 const userInfoProfile = new UserInfo({
@@ -41,9 +41,22 @@ const userInfoProfile = new UserInfo({
 // Получение значений попап-профиля
 function getUserInputs() {
   const userInfo = userInfoProfile.getUserInfo();
+  // @ts-ignore
   nameInput.value = userInfo.name;
+  // @ts-ignore
   jobInput.value = userInfo.description;
-  console.log(userInfo);
+}
+
+// Функция создания одной карточки
+
+function createCardElement(item) {
+  const card = new Card(item, templateSelector.elementTemplate, {
+    handleCardClick: () => {
+      popupZoom.open(item);
+    },
+  });
+  const cardElement = card.generateCard();
+  cardList.addItem(cardElement);
 }
 
 // Cоздания экземпляра для рендеринга изначальнного массива карточек
@@ -51,15 +64,7 @@ const cardList = new Section(
   {
     data: cards,
     renderer: (item) => {
-      const card = new Card(item, templateSelector.elementTemplate, {
-        handleCardClick: () => {
-          popupZoom.open(item);
-          console.log(item);
-        },
-      });
-      const cardElement = card.generateCard();
-
-      cardList.addItem(cardElement);
+      createCardElement(item);
     },
   },
   containerSelector.elements
@@ -71,17 +76,6 @@ popupZoom.setEventListeners();
 
 // Рендеринг карточек
 cardList.renderItems();
-
-function createCardElement(item) {
-  const card = new Card(item, templateSelector.elementTemplate, {
-    handleCardClick: () => {
-      popupZoom.open(item);
-      console.log(item);
-    },
-  });
-  const cardElement = card.generateCard();
-  cardList.addItem(cardElement);
-}
 
 // Создания экземепляра попап-профиля
 const popupProfile = new Popup(popupSelector.popupProfile);
@@ -96,7 +90,6 @@ const popupNewPlaceForm = new PopupWithForm(popupSelector.popupNewPlace, {
   submitForm: (formData) => {
     createCardElement(formData);
     popupNewPlaceForm.close();
-    console.log(formData);
   },
 });
 // Наложение слушателей событий
@@ -107,7 +100,6 @@ const popupProfileForm = new PopupWithForm(popupSelector.popupProfile, {
   submitForm: (formData) => {
     userInfoProfile.setUserInfo(formData);
     popupProfileForm.close();
-    console.log(formData);
   },
 });
 popupProfileForm.setEventListeners();

@@ -55,8 +55,6 @@ export default class Card {
   }
 
   _handleImageElementClick(cardElemImg) {
-    const popupCaption = document.querySelector(".popup__caption");
-    popupCaption.textContent = this._title;
     this._handleCardClick(this._item);
   }
 }
