@@ -23,7 +23,7 @@ import {
   validationConfig,
   cards,
   popupSelector,
-} from "../components/constants.js";
+} from "../utils/constants.js";
 import Popup from "../components/Popup.js";
 import Card from "../components/Card.js";
 import Section from "../components/Section.js";
@@ -78,14 +78,14 @@ popupZoom.setEventListeners();
 cardList.renderItems();
 
 // Создания экземепляра попап-профиля
-const popupProfile = new Popup(popupSelector.popupProfile);
-popupProfile.setEventListeners();
-// Cоздания экземпляра попап-нового места
-const popupNewPlace = new Popup(popupSelector.popupNewPlace);
-// Наложение слушателей событий
-popupNewPlace.setEventListeners();
+// const popupProfile = new Popup(popupSelector.popupProfile);
+// popupProfile.setEventListeners();
+// // Cоздания экземпляра попап-нового места
+// const popupNewPlace = new Popup(popupSelector.popupNewPlace);
+// // Наложение слушателей событий
+// popupNewPlace.setEventListeners();
 
-// Создания экземпляра формы для добавления карточки
+// Создания экземпляра попап-формы для добавления карточки
 const popupNewPlaceForm = new PopupWithForm(popupSelector.popupNewPlace, {
   submitForm: (formData) => {
     createCardElement(formData);
@@ -95,7 +95,7 @@ const popupNewPlaceForm = new PopupWithForm(popupSelector.popupNewPlace, {
 // Наложение слушателей событий
 popupNewPlaceForm.setEventListeners();
 
-// Создания экземпляра формы для профиля
+// Создания экземпляра попап-формы для профиля
 const popupProfileForm = new PopupWithForm(popupSelector.popupProfile, {
   submitForm: (formData) => {
     userInfoProfile.setUserInfo(formData);
@@ -108,7 +108,7 @@ popupProfileForm.setEventListeners();
 editButton.addEventListener("click", () => {
   validatorPopupProfile.hideInputErrors();
   getUserInputs();
-  popupProfile.open();
+  popupProfileForm.open();
 });
 addButton.addEventListener("click", () => {
   validatorNewPlace.hideInputErrors();
