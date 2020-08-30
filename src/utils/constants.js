@@ -16,6 +16,7 @@ export const closeButton = document.querySelector(".popup__close-button");
 // export const closeButtonZoom = document.querySelector(
 //   ".popup__close-button_zoom"
 // );
+export const editAvatarButton = document.querySelector(".profile__avatar")
 export const addButton = document.querySelector(".profile__add-button");
 // export const textProfile = document.querySelector(".profile__text");
 // export const subtextProfile = document.querySelector(".profile__subtext");
@@ -33,10 +34,10 @@ export const popupSelector = {
   popupAvatar: ".popup_avatar"
 };
 
-// export const submitButton = document.querySelector(".popup__submit-button");
 // export const popup = document.querySelector(".popup");
 // export const popupZoom = document.querySelector(".popup_zoom");
 // export const popupNewPlace = document.querySelector(".popup_new-place");
+export const formElementAvatar = document.querySelector(".popup__form_avatar");
 export const formElement = document.querySelector(".popup__form");
 export const formElementNewPlace = document.querySelector(
   ".popup__form_new-place"

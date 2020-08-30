@@ -53,12 +53,14 @@ export default class Card {
     this._handleCardLikeClick(this._item);
   }
 
-  _handleRemoveButtonClick() {
-    // @ts-ignore
-    const deleteElement = event.target.closest(".element");
+  removeCard() {
     // removePopupCloseEvents();
-    deleteElement.remove();
-    deleteElement.innerHTML = " ";
+    this._element.remove();
+    this._element.innerHTML = " ";
+  }
+
+  _handleRemoveButtonClick() {
+
     this._handleCardDeleteClick(this._item)
   }
 

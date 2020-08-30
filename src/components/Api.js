@@ -18,13 +18,22 @@ export default class Api {
             .then(res => res.json());
     }
 
+    updateUserImage(formData) {
+        return fetch(`${this._baseUrl}/users/me/avatar`, {
+            method: 'PATCH',
+            headers: this._headers,
+            body: JSON.stringify(formData)
+        })
+            .then(res => res.json());
+    }
+
     getItems() {
         return fetch(`${this._baseUrl}/cards`, { headers: this._headers })
             .then(res => res.json());
     }
 
-    deleteItem(id) {
-        return fetch(`${this._baseUrl}/cards/${id}`, { method: 'DELETE', headers: this._headers })
+    deleteItem(item) {
+        return fetch(`${this._baseUrl}/cards/${item._id}`, { method: 'DELETE', headers: this._headers })
             .then(res => {
                 if (res.ok) {
                     return res.json();

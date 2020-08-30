@@ -21,8 +21,10 @@ import {
   formElement,
   formElementNewPlace,
   validationConfig,
-  cards,
+  // cards,
   popupSelector,
+  editAvatarButton,
+  formElementAvatar,
 } from "../utils/constants.js";
 import Popup from "../components/Popup.js";
 import Card from "../components/Card.js";
@@ -34,6 +36,8 @@ import UserInfo from "../components/UserInfo.js";
 import Api from "../components/Api";
 import PopupWithSubmit from "../components/PopupWithSubmit";
 
+
+// Создание экземпляра класс API для взаимодействия с сервером
 const apiManager = new Api({
   baseUrl: 'https://mesto.nomoreparties.co/v1/cohort-14',
   headers: {
@@ -42,13 +46,14 @@ const apiManager = new Api({
   }
 });
 
-// Создания экземпляра класса с инфо. попап-профиля
+// Создания экземпляра класса с инфо. попапа
 const userInfoProfile = new UserInfo({
   nameSelector: ".profile__text",
-  descriptionSelector: ".profile__subtext",
+  aboutSelector: ".profile__subtext",
+  avatar: ".profile__avatar"
 });
 
-// Получение значений попап-профиля
+// Получение значений попапа
 function getUserInputs() {
   const userInfo = userInfoProfile.getUserInfo();
   // @ts-ignore
@@ -82,21 +87,6 @@ const popupProfileForm = new PopupWithForm(popupSelector.popupProfile, {
         popupProfileForm.updateSubmitButtonTitle('Сохранить');
       });
   },
-  // submitForm: (formData) => {
-  //   console.log('Submitting...', formData);
-
-  //   // Переделал метод, теперь callback "submitForm" возвращает Promise,
-  //   // который будет ждать код PopupWithForm
-  //   return apiManager.updateUserInfo(formData)
-  //     .then(() => {
-  //       console.log('User info is updated', formData);
-  //       userInfoProfile.setUserInfo(formData);
-  //       popupProfileForm.close();
-  //     })
-  //     .catch(() => {
-  //       alert('Ошибка обновления');
-  //     })
-  // },
 });
 popupProfileForm.setEventListeners();
 
@@ -106,18 +96,24 @@ editButton.addEventListener("click", () => {
   getUserInputs();
   popupProfileForm.open();
 });
-//submitButton.addEventListener("click", () => {});
+editAvatarButton.addEventListener("click", () => {
+  validatiorAvatar.hideInputErrors();
+  getUserInputs();
+  popupWithAvatar.open();
+})
 
 // Cоздание экземпляров для валидации форм
 const validatorPopupProfile = new FormValidator(validationConfig, formElement);
-
 const validatorNewPlace = new FormValidator(
   validationConfig,
   formElementNewPlace
 );
+const validatiorAvatar = new FormValidator(validationConfig, formElementAvatar);
+
 // Валидация посредством вызова публичного метода для данного экземпляра класса
 validatorPopupProfile.enableValidation();
 validatorNewPlace.enableValidation();
+validatiorAvatar.enableValidation();
 
 
 // Создание экземпляра попап-подтверждения
@@ -128,8 +124,29 @@ const popupWithSubmit = new PopupWithSubmit(popupSelector.popupConfirm, {
 })
 popupWithSubmit.setEventListeners()
 
-// Получение  карточек с сервера с помощью API
+const popupWithAvatar = new PopupWithForm(popupSelector.popupAvatar, {
+  submitForm: (formData) => {
+    console.log('Submitting...', formData);
 
+    popupWithAvatar.updateSubmitButtonTitle('Сохранение...');
+    apiManager.updateUserImage(formData)
+      .then((serverUserInfo) => {
+        console.log('User info is updated', serverUserInfo);;
+
+        userInfoProfile.setUserInfo(serverUserInfo);
+        popupWithAvatar.close();
+      })
+      .catch(() => {
+        alert('Ошибка обновления');
+      })
+      .finally(() => {
+        popupWithAvatar.updateSubmitButtonTitle('Сохранить');
+      });
+  },
+})
+popupWithAvatar.setEventListeners();
+
+// Получение  карточек с сервера с помощью API
 apiManager.getItems()
   .then(cards => {
     cards.reverse();
@@ -139,15 +156,16 @@ apiManager.getItems()
         handleCardClick: () => {
           popupZoom.open(item);
         },
-        handleCardLikeClick: (id) => {
-          console.log(id, 'is liked');
+        handleCardLikeClick: (item) => {
+          console.log(item, 'is liked');
         },
-        handleCardDeleteClick: (id) => {
+        handleCardDeleteClick: (item) => {
           popupWithSubmit.setSubmitAction(() => {
-            apiManager.deleteItem(id)
-              .then(res => {
-                card.
-            })
+            apiManager.deleteItem(item)
+              .then(() => {
+                card.removeCard();
+                popupWithSubmit.close()
+              })
           });
           popupWithSubmit.open();
         }
