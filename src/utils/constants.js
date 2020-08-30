@@ -29,6 +29,8 @@ export const popupSelector = {
   popupProfile: ".popup",
   popupZoom: ".popup_zoom",
   popupNewPlace: ".popup_new-place",
+  popupConfirm: ".popup_confirm",
+  popupAvatar: ".popup_avatar"
 };
 
 // export const submitButton = document.querySelector(".popup__submit-button");

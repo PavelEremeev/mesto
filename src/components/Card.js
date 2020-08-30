@@ -1,10 +1,12 @@
 export default class Card {
-  constructor(item, templateSelector, { handleCardClick }) {
+  constructor(item, templateSelector, { handleCardClick, handleCardLikeClick, handleCardDeleteClick }) {
     this._item = item;
     this._title = item.name;
     this._image = item.link;
     this._templateSelector = templateSelector;
     this._handleCardClick = handleCardClick;
+    this._handleCardLikeClick = handleCardLikeClick;
+    this._handleCardDeleteClick = handleCardDeleteClick;
   }
 
   _getTemplate() {
@@ -34,8 +36,12 @@ export default class Card {
     const removeButton = this._element.querySelector(".element__remove-button");
     const cardElementImage = this._element.querySelector(".element__image");
 
-    likeButton.addEventListener("click", this._handleLikeButtonClick);
-    removeButton.addEventListener("click", this._handleRemoveButtonClick);
+    likeButton.addEventListener("click", () => {
+      this._handleLikeButtonClick();
+    });
+    removeButton.addEventListener("click", () => {
+      this._handleRemoveButtonClick();
+    });
     cardElementImage.addEventListener("click", () =>
       this._handleImageElementClick(cardElementImage)
     );
@@ -44,6 +50,7 @@ export default class Card {
   _handleLikeButtonClick() {
     // @ts-ignore
     event.target.classList.toggle("element__like-button_active");
+    this._handleCardLikeClick(this._item);
   }
 
   _handleRemoveButtonClick() {
@@ -52,6 +59,7 @@ export default class Card {
     // removePopupCloseEvents();
     deleteElement.remove();
     deleteElement.innerHTML = " ";
+    this._handleCardDeleteClick(this._item)
   }
 
   _handleImageElementClick(cardElemImg) {

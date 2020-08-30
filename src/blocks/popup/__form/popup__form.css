@@ -1,4 +1,6 @@
 @import url(./_new-place/popup__form_new-place.css);
+@import url(./_confirm/popup__form_confirm.css);
+@import url(./_avatar/popup__form_avatar.css);
 
 .popup__form {
     max-width: 430px;

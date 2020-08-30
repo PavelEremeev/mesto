@@ -1,4 +1,6 @@
 @import url(./_new-place/popup__text_new-place.css);
+@import url(./_confirm/popup__text_confirm.css);
+@import url(./_avatar/popup__text_avatar.css);
 
 .popup__text {
     font-weight: 900;
