@@ -36,21 +36,20 @@ import UserInfo from "../components/UserInfo.js";
 import Api from "../components/Api";
 import PopupWithSubmit from "../components/PopupWithSubmit";
 
-
 // Создание экземпляра класс API для взаимодействия с сервером
 const apiManager = new Api({
-  baseUrl: 'https://mesto.nomoreparties.co/v1/cohort-14',
+  baseUrl: "https://mesto.nomoreparties.co/v1/cohort-14",
   headers: {
-    authorization: '957c9aa7-6dd0-46ee-b746-30b25c4b69ab',
-    'Content-Type': 'application/json'
-  }
+    authorization: "957c9aa7-6dd0-46ee-b746-30b25c4b69ab",
+    "Content-Type": "application/json",
+  },
 });
 
 // Создания экземпляра класса с инфо. попапа
 const userInfoProfile = new UserInfo({
   nameSelector: ".profile__text",
   aboutSelector: ".profile__subtext",
-  avatar: ".profile__avatar"
+  avatar: ".profile__avatar",
 });
 
 // Получение значений попапа
@@ -70,21 +69,22 @@ popupZoom.setEventListeners();
 // Создания экземпляра попап-формы для профиля
 const popupProfileForm = new PopupWithForm(popupSelector.popupProfile, {
   submitForm: (formData) => {
-    console.log('Submitting...', formData);
+    console.log("Submitting...", formData);
 
-    popupProfileForm.updateSubmitButtonTitle('Сохранение...');
-    apiManager.updateUserInfo(formData)
+    popupProfileForm.updateSubmitButtonTitle("Сохранение...");
+    apiManager
+      .updateUserInfo(formData)
       .then((serverUserInfo) => {
-        console.log('User info is updated', serverUserInfo);
+        console.log("User info is updated", serverUserInfo);
 
         userInfoProfile.setUserInfo(serverUserInfo);
         popupProfileForm.close();
       })
       .catch(() => {
-        alert('Ошибка обновления');
+        alert("Ошибка обновления");
       })
       .finally(() => {
-        popupProfileForm.updateSubmitButtonTitle('Сохранить');
+        popupProfileForm.updateSubmitButtonTitle("Сохранить");
       });
   },
 });
@@ -100,7 +100,7 @@ editAvatarButton.addEventListener("click", () => {
   validatiorAvatar.hideInputErrors();
   getUserInputs();
   popupWithAvatar.open();
-})
+});
 
 // Cоздание экземпляров для валидации форм
 const validatorPopupProfile = new FormValidator(validationConfig, formElement);
@@ -115,112 +115,110 @@ validatorPopupProfile.enableValidation();
 validatorNewPlace.enableValidation();
 validatiorAvatar.enableValidation();
 
-
 // Создание экземпляра попап-подтверждения
 const popupWithSubmit = new PopupWithSubmit(popupSelector.popupConfirm, {
   handleSubmitCallback: () => {
-    console.log('Empty');
-  }
-})
-popupWithSubmit.setEventListeners()
+    console.log("Empty");
+  },
+});
+popupWithSubmit.setEventListeners();
 
 const popupWithAvatar = new PopupWithForm(popupSelector.popupAvatar, {
   submitForm: (formData) => {
-    console.log('Submitting...', formData);
+    console.log("Submitting...", formData);
 
-    popupWithAvatar.updateSubmitButtonTitle('Сохранение...');
-    apiManager.updateUserImage(formData)
+    popupWithAvatar.updateSubmitButtonTitle("Сохранение...");
+    apiManager
+      .updateUserImage(formData)
       .then((serverUserInfo) => {
-        console.log('User info is updated', serverUserInfo);;
+        console.log("User info is updated", serverUserInfo);
 
         userInfoProfile.setUserInfo(serverUserInfo);
         popupWithAvatar.close();
       })
       .catch(() => {
-        alert('Ошибка обновления');
+        alert("Ошибка обновления");
       })
       .finally(() => {
-        popupWithAvatar.updateSubmitButtonTitle('Сохранить');
+        popupWithAvatar.updateSubmitButtonTitle("Сохранить");
       });
   },
-})
+});
 popupWithAvatar.setEventListeners();
 
 // Получение  карточек с сервера с помощью API
-apiManager.getItems()
-  .then(cards => {
-    cards.reverse();
-    // Функция создания одной карточки
-    function createCardElement(item) {
-      const card = new Card(item, templateSelector.elementTemplate, {
-        handleCardClick: () => {
-          popupZoom.open(item);
-        },
-        handleCardLikeClick: (item) => {
-          console.log(item, 'is liked');
-        },
-        handleCardDeleteClick: (item) => {
-          popupWithSubmit.setSubmitAction(() => {
-            apiManager.deleteItem(item)
-              .then(() => {
-                card.removeCard();
-                popupWithSubmit.close()
-              })
-          });
-          popupWithSubmit.open();
-        }
-      });
-      const cardElement = card.generateCard();
-      cardList.addItem(cardElement);
-    }
-
-    // Cоздания экземпляра для рендеринга массива карточек
-    const cardList = new Section(
-      {
-        data: cards,
-        renderer: (item) => {
-          createCardElement(item);
-        },
+apiManager.getItems().then((cards) => {
+  cards.reverse();
+  // Функция создания одной карточки
+  function createCardElement(item) {
+    const card = new Card(item, templateSelector.elementTemplate, {
+      handleCardClick: () => {
+        popupZoom.open(item);
       },
-      containerSelector.elements
-    );
-
-    // Рендеринг карточек
-    cardList.renderItems();
-
-    // Создания экземпляра попап-формы для добавления карточки
-    const popupNewPlaceForm = new PopupWithForm(popupSelector.popupNewPlace, {
-      submitForm: (formData) => {
-        console.log('Submitting...', formData);
-
-        popupNewPlaceForm.updateSubmitButtonTitle('Добавление...');
-        apiManager.createItem(formData)
-          .then((serverItem) => {
-            console.log('Card is added', serverItem);
-
-            createCardElement(serverItem);
-            popupNewPlaceForm.close();
-          })
-          .catch(() => {
-            alert('Ошибка добавления');
-          })
-          .finally(() => {
-            popupNewPlaceForm.updateSubmitButtonTitle('Создать mesto');
+      handleCardLikeClick: (item) => {
+        console.log(item, "is liked");
+      },
+      handleCardDeleteClick: (item) => {
+        popupWithSubmit.setSubmitAction(() => {
+          apiManager.deleteItem(item).then(() => {
+            card.removeCard();
+            popupWithSubmit.close();
           });
+        });
+
+        popupWithSubmit.open();
       },
     });
-    // Наложение слушателей событий
-    popupNewPlaceForm.setEventListeners();
+    const cardElement = card.generateCard();
+    cardList.addItem(cardElement);
+  }
 
-    addButton.addEventListener("click", () => {
-      validatorNewPlace.hideInputErrors();
-      validatorNewPlace.toggleButtonState();
-      popupNewPlaceForm.open();
-    });
+  // Cоздания экземпляра для рендеринга массива карточек
+  const cardList = new Section(
+    {
+      data: cards,
+      renderer: (item) => {
+        createCardElement(item);
+      },
+    },
+    containerSelector.elements
+  );
+
+  // Рендеринг карточек
+  cardList.renderItems();
+
+  // Создания экземпляра попап-формы для добавления карточки
+  const popupNewPlaceForm = new PopupWithForm(popupSelector.popupNewPlace, {
+    submitForm: (formData) => {
+      console.log("Submitting...", formData);
+
+      popupNewPlaceForm.updateSubmitButtonTitle("Добавление...");
+      apiManager
+        .createItem(formData)
+        .then((serverItem) => {
+          console.log("Card is added", serverItem);
+
+          createCardElement(serverItem);
+          popupNewPlaceForm.close();
+        })
+        .catch(() => {
+          alert("Ошибка добавления");
+        })
+        .finally(() => {
+          popupNewPlaceForm.updateSubmitButtonTitle("Создать mesto");
+        });
+    },
   });
+  // Наложение слушателей событий
+  popupNewPlaceForm.setEventListeners();
 
-
-apiManager.getUserInfo()
-  .then(userInfo => {
-    userInfoProfile.setUserInfo(userInfo);
+  addButton.addEventListener("click", () => {
+    validatorNewPlace.hideInputErrors();
+    validatorNewPlace.toggleButtonState();
+    popupNewPlaceForm.open();
   });
+});
+
+apiManager.getUserInfo().then((userInfo) => {
+  userInfoProfile.setUserInfo(userInfo);
+});

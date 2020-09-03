@@ -1,8 +1,15 @@
 export default class Card {
-  constructor(item, templateSelector, { handleCardClick, handleCardLikeClick, handleCardDeleteClick }) {
+  constructor(
+    item,
+    templateSelector,
+    { handleCardClick, handleCardLikeClick, handleCardDeleteClick, ownerId }
+  ) {
     this._item = item;
     this._title = item.name;
     this._image = item.link;
+    this._likes = item.likes;
+    this._id = item._id;
+    this._ownerId = ownerId;
     this._templateSelector = templateSelector;
     this._handleCardClick = handleCardClick;
     this._handleCardLikeClick = handleCardLikeClick;
@@ -56,15 +63,22 @@ export default class Card {
   removeCard() {
     // removePopupCloseEvents();
     this._element.remove();
-    this._element.innerHTML = " ";
   }
 
   _handleRemoveButtonClick() {
-
-    this._handleCardDeleteClick(this._item)
+    this._handleCardDeleteClick(this._item);
   }
 
   _handleImageElementClick(cardElemImg) {
     this._handleCardClick(this._item);
+  }
+
+  updateLikes(likes) {
+    this._likes = likes;
+    this.renderLikes();
+  }
+
+  renderLikes() {
+    this._likeCounter.textContent = this._likes.length;
   }
 }
