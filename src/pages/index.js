@@ -146,79 +146,101 @@ const popupWithAvatar = new PopupWithForm(popupSelector.popupAvatar, {
 });
 popupWithAvatar.setEventListeners();
 
-// Получение  карточек с сервера с помощью API
-apiManager.getItems().then((cards) => {
-  cards.reverse();
-  // Функция создания одной карточки
-  function createCardElement(item) {
-    const card = new Card(item, templateSelector.elementTemplate, {
-      handleCardClick: () => {
-        popupZoom.open(item);
-      },
-      handleCardLikeClick: (item) => {
-        console.log(item, "is liked");
-      },
-      handleCardDeleteClick: (item) => {
-        popupWithSubmit.setSubmitAction(() => {
-          apiManager.deleteItem(item).then(() => {
-            card.removeCard();
-            popupWithSubmit.close();
-          });
-        });
+// Получение данных и карточек с сервера с помощью API
+Promise.all([apiManager.getUserInfo(), apiManager.getItems()]).then(
+  ([userInfo, cards]) => {
+    const myId = userInfo._id;
+    userInfoProfile.setUserInfo(userInfo);
 
-        popupWithSubmit.open();
+    // Функция создания  карточки
+    cards.reverse();
+    function createCardElement(item) {
+      const card = new Card(item, templateSelector.elementTemplate, {
+        handleCardClick: () => {
+          popupZoom.open(item);
+        },
+        handleCardLikeClick: (evt) => {
+          const isLiked = card.isLiked();
+          apiManager
+            .rateItem(item._id, isLiked)
+            .then((res) => {
+              card.updateLikes(res.likes);
+            })
+            .then((_) => {
+              evt.target.classList.toggle("element__like-button_active");
+            })
+            .catch((err) => console.log(err));
+        },
+        handleCardDeleteClick: (item) => {
+          popupWithSubmit.setSubmitAction(() => {
+            apiManager.deleteItem(item).then(() => {
+              card.removeCard();
+              popupWithSubmit.close();
+            });
+          }),
+            popupWithSubmit.open();
+        },
+        // handleCardDisLikeClick: {},
+        currentUserId: myId,
+      });
+      return card;
+    }
+
+    // Cоздания экземпляра для рендеринга массива карточек
+    const cardList = new Section(
+      {
+        data: cards,
+        renderer: (item) => {
+          const card = createCardElement(item);
+          const cardElement = card.generateCard();
+          const isLiked = card.isLiked();
+          if (item.owner._id != myId) {
+            cardElement.querySelector(".element__remove-button").style.display =
+              "none";
+          }
+          if (isLiked) {
+            cardElement
+              .querySelector(".element__like-button")
+              .classList.add("element__like-button_active");
+          }
+          cardList.addItem(cardElement);
+        },
+      },
+      containerSelector.elements
+    );
+
+    // Рендеринг карточек
+    cardList.renderItems();
+
+    // Создания экземпляра попап-формы для добавления карточки
+    const popupNewPlaceForm = new PopupWithForm(popupSelector.popupNewPlace, {
+      submitForm: (formData) => {
+        console.log("Submitting...", formData);
+
+        popupNewPlaceForm.updateSubmitButtonTitle("Добавление...");
+        apiManager
+          .createItem(formData)
+          .then((serverItem) => {
+            console.log("Card is added", serverItem);
+
+            createCardElement(serverItem);
+            popupNewPlaceForm.close();
+          })
+          .catch(() => {
+            alert("Ошибка добавления");
+          })
+          .finally(() => {
+            popupNewPlaceForm.updateSubmitButtonTitle("Создать mesto");
+          });
       },
     });
-    const cardElement = card.generateCard();
-    cardList.addItem(cardElement);
+    // Наложение слушателей событий
+    popupNewPlaceForm.setEventListeners();
+
+    addButton.addEventListener("click", () => {
+      validatorNewPlace.hideInputErrors();
+      validatorNewPlace.toggleButtonState();
+      popupNewPlaceForm.open();
+    });
   }
-
-  // Cоздания экземпляра для рендеринга массива карточек
-  const cardList = new Section(
-    {
-      data: cards,
-      renderer: (item) => {
-        createCardElement(item);
-      },
-    },
-    containerSelector.elements
-  );
-
-  // Рендеринг карточек
-  cardList.renderItems();
-
-  // Создания экземпляра попап-формы для добавления карточки
-  const popupNewPlaceForm = new PopupWithForm(popupSelector.popupNewPlace, {
-    submitForm: (formData) => {
-      console.log("Submitting...", formData);
-
-      popupNewPlaceForm.updateSubmitButtonTitle("Добавление...");
-      apiManager
-        .createItem(formData)
-        .then((serverItem) => {
-          console.log("Card is added", serverItem);
-
-          createCardElement(serverItem);
-          popupNewPlaceForm.close();
-        })
-        .catch(() => {
-          alert("Ошибка добавления");
-        })
-        .finally(() => {
-          popupNewPlaceForm.updateSubmitButtonTitle("Создать mesto");
-        });
-    },
-  });
-  // Наложение слушателей событий
-  popupNewPlaceForm.setEventListeners();
-
-  addButton.addEventListener("click", () => {
-    validatorNewPlace.hideInputErrors();
-    validatorNewPlace.toggleButtonState();
-    popupNewPlaceForm.open();
-  });
-});
-
-apiManager.getUserInfo().then((userInfo) => {
-  userInfoProfile.setUserInfo(userInfo);
-});
+);
