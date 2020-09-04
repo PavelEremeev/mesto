@@ -223,7 +223,10 @@ Promise.all([apiManager.getUserInfo(), apiManager.getItems()]).then(
           .then((serverItem) => {
             console.log("Card is added", serverItem);
 
-            createCardElement(serverItem);
+            const card = createCardElement(serverItem);
+            const cardElement = card.generateCard();
+            cardList.addItem(cardElement);
+
             popupNewPlaceForm.close();
           })
           .catch(() => {

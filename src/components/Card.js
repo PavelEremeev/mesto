@@ -55,8 +55,8 @@ export default class Card {
   }
 
   _setEventListeners() {
-    this._elementLikeButton.addEventListener("click", () => {
-      this._handleLikeButtonClick();
+    this._elementLikeButton.addEventListener("click", (evt) => {
+      this._handleLikeButtonClick(evt);
     });
     this._elementRemoveButton.addEventListener("click", () => {
       this._handleRemoveButtonClick();
@@ -66,8 +66,8 @@ export default class Card {
     );
   }
 
-  _handleLikeButtonClick() {
-    this._handleCardLikeClick(this._item);
+  _handleLikeButtonClick(evt) {
+    this._handleCardLikeClick(evt);
     // this._elementLikeButton.classList.toggle("element__like-button_active");
     // if (this._elementLikeButton.contains("element__like-button_active")) {
     //   this._handleCardLikeClick(this._item);
