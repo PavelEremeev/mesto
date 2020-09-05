@@ -98,6 +98,7 @@ editButton.addEventListener("click", () => {
 });
 editAvatarButton.addEventListener("click", () => {
   validatiorAvatar.hideInputErrors();
+  validatiorAvatar.toggleButtonState();
   getUserInputs();
   popupWithAvatar.open();
 });
@@ -147,8 +148,8 @@ const popupWithAvatar = new PopupWithForm(popupSelector.popupAvatar, {
 popupWithAvatar.setEventListeners();
 
 // Получение данных и карточек с сервера с помощью API
-Promise.all([apiManager.getUserInfo(), apiManager.getItems()]).then(
-  ([userInfo, cards]) => {
+Promise.all([apiManager.getUserInfo(), apiManager.getItems()])
+  .then(([userInfo, cards]) => {
     const myId = userInfo._id;
     userInfoProfile.setUserInfo(userInfo);
 
@@ -173,16 +174,20 @@ Promise.all([apiManager.getUserInfo(), apiManager.getItems()]).then(
         },
         handleCardDeleteClick: (item) => {
           popupWithSubmit.setSubmitAction(() => {
-            apiManager.deleteItem(item).then(() => {
-              card.removeCard();
-              popupWithSubmit.close();
-            });
+            apiManager
+              .deleteItem(item)
+              .then(() => {
+                card.removeCard();
+                popupWithSubmit.close();
+              })
+              .catch((err) => console.log(err));
           }),
             popupWithSubmit.open();
         },
         // handleCardDisLikeClick: {},
         currentUserId: myId,
       });
+      card.renderLikes();
       return card;
     }
 
@@ -245,5 +250,5 @@ Promise.all([apiManager.getUserInfo(), apiManager.getItems()]).then(
       validatorNewPlace.toggleButtonState();
       popupNewPlaceForm.open();
     });
-  }
-);
+  })
+  .catch((err) => console.log(err));

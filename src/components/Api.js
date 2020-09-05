@@ -7,7 +7,12 @@ export default class Api {
   getUserInfo() {
     return fetch(`${this._baseUrl}/users/me`, {
       headers: this._headers,
-    }).then((res) => res.json());
+    }).then((res) => {
+      if (res.ok) {
+        return res.json();
+      }
+      return Promise.reject(`Что-то пошло не так! :( ${res.status}`);
+    });
   }
 
   updateUserInfo(formData) {
@@ -15,7 +20,12 @@ export default class Api {
       method: "PATCH",
       headers: this._headers,
       body: JSON.stringify(formData),
-    }).then((res) => res.json());
+    }).then((res) => {
+      if (res.ok) {
+        return res.json();
+      }
+      return Promise.reject(`Что-то пошло не так! :( ${res.status}`);
+    });
   }
 
   updateUserImage(formData) {
@@ -23,13 +33,23 @@ export default class Api {
       method: "PATCH",
       headers: this._headers,
       body: JSON.stringify(formData),
-    }).then((res) => res.json());
+    }).then((res) => {
+      if (res.ok) {
+        return res.json();
+      }
+      return Promise.reject(`Что-то пошло не так! :( ${res.status}`);
+    });
   }
 
   getItems() {
     return fetch(`${this._baseUrl}/cards`, {
       headers: this._headers,
-    }).then((res) => res.json());
+    }).then((res) => {
+      if (res.ok) {
+        return res.json();
+      }
+      return Promise.reject(`Что-то пошло не так! :( ${res.status}`);
+    });
   }
 
   deleteItem(item) {
@@ -87,6 +107,11 @@ export default class Api {
       method: "POST",
       headers: this._headers,
       body: JSON.stringify(item),
-    }).then((res) => res.json());
+    }).then((res) => {
+      if (res.ok) {
+        return res.json();
+      }
+      return Promise.reject(`Что-то пошло не так! :( ${res.status}`);
+    });
   }
 }
