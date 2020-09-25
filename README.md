@@ -1,25 +1,25 @@
-# Проект 4: Mesto | Project 4-7: Mesto
+# Проект 4-9: Mesto | Project 4-9 by Yandex.Practicum: Mesto
 
 Четвертая - седьмая практические работы по курсу Я.Практикум
 
-Fourth - seventh practical works by course of Yandex.Praktikum
+Fourth - ninth practical works by course of Yandex.Praktikum
 
 GithubPages: https://paveleremeev.github.io/mesto/
 
-### Обзор | Briefing
+## Обзор | Briefing
 
 - Описание | Description
 - Технологии | Technologies
 
-** Описание | Description**
+## Описание | Description
 
-Демонстрация веб-сайта с использованием динамический карточек. Сайт сверстан с использованием адаптивной / отзывчивой верстки согласно макету в Фигме (https://www.figma.com/file/StZjf8HnoeLdiXS7dYrLAh/JavaScript.-Sprint-4), адаптивность в пределах от 325рх до 1080р под разные девайсы. Цель работы - закрепить знания верстки и получить навыки работы с Javascript.
+Демонстрация веб-сайта с использованием динамическиx карточек. Сайт сверстан с использованием адаптивной / отзывчивой верстки согласно макету в Фигме (https://www.figma.com/file/StZjf8HnoeLdiXS7dYrLAh/JavaScript.-Sprint-4), адаптивность в пределах от 325рх до 1080р под разные девайсы. Цель работы - закрепить знания верстки и получить навыки работы с Javascript.
 
 This is demonыtration card-website. The site is creating using by Figma layout for different screen resolutions.Layout is adaptive between 325px and 1080p+.
 Main tasks: make site is adaptive and get skills to work with JavaScript.
 (Figma layout - https://www.figma.com/file/StZjf8HnoeLdiXS7dYrLAh/JavaScript.-Sprint-4)
 
-** Технологии | Technologies**
+## Технологии | Technologies
 
 Это мой четвертый проект и я в нем использую:
 
